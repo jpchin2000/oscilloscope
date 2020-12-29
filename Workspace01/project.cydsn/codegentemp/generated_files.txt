@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="us-ascii"?>
+
+<fileSet version="1" anchorPath="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp" xsi:schemaLocation="http://cypress.com/xsd/cypathdictionary cypathdictionary.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://cypress.com/xsd/cypathdictionary">
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cyfitter_cfg.h" value="HEADER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cyfitter_sysint_cfg.h" value="HEADER;;;;;Pins and Interrupts" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cyfitter_sysint_cfg.c" value="SOURCE_C;CortexM0p,CortexM4;;;;Pins and Interrupts" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cyfitter_cfg.c" value="SOURCE_C;CortexM0p;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cymetadata.c" value="SOURCE_C;CortexM0p,CortexM4;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cydevice_trm.h" value="HEADER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cydevicegnu_trm.inc" value="HEADER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cydevicerv_trm.inc" value="HEADER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cydeviceiar_trm.inc" value="HEADER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cyfitter.h" value="HEADER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cyfitter_gpio.h" value="HEADER;;;;;Pins and Interrupts" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cyfitter_sysint.h" value="HEADER;;;;;Pins and Interrupts" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cydisabledsheets.h" value="HEADER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\Clk_33MHz.h" value="HEADER;;;;;Clk_33MHz" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\GraphicLCDIntf_1.c" value="SOURCE_C;CortexM0p,CortexM4;;;;GraphicLCDIntf_1" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\GraphicLCDIntf_1.h" value="HEADER;;;;;GraphicLCDIntf_1" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\GraphicLCDIntf_1_PM.c" value="SOURCE_C;CortexM0p,CortexM4;;;;GraphicLCDIntf_1" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\UART.c" value="SOURCE_C;CortexM0p,CortexM4;;;;UART" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\UART.h" value="HEADER;;;;;UART" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\ADC.c" value="SOURCE_C;CortexM0p,CortexM4;;;;ADC" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\ADC.h" value="HEADER;;;;;ADC" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\ADC_INT.c" value="SOURCE_C;CortexM0p,CortexM4;;;;ADC" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\ADC_INIT.c" value="SOURCE_C;CortexM0p,CortexM4;;;;ADC" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\ADC_PM.c" value="SOURCE_C;CortexM0p,CortexM4;;;;ADC" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\DMA_1.c" value="SOURCE_C;CortexM0p,CortexM4;;;;DMA_1" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\DMA_1.h" value="HEADER;;;;;DMA_1" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\DMA_2.c" value="SOURCE_C;CortexM0p,CortexM4;;;;DMA_2" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\DMA_2.h" value="HEADER;;;;;DMA_2" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\UART_SCBCLK.h" value="HEADER;;;;;UART_SCBCLK" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\ADC_intSarClock.h" value="HEADER;;;;;ADC_intSarClock" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\project.h" value="OTHER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cycodeshareimport.ld" value="OTHER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cycodeshareexport.ld" value="OTHER;;;;;" />
+  <file name="C:\Users\dasta\cse121\Lab\project\design\Workspace01\project.cydsn\codegentemp\cycodeshareimport.scat" value="OTHER;;;;;" />
+</fileSet>

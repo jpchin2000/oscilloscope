@@ -1,0 +1,3454 @@
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"Calculations.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.global	__aeabi_dmul
+  21              		.global	__aeabi_i2d
+  22              		.global	__aeabi_d2iz
+  23              		.section	.text.findAmp,"ax",%progbits
+  24              		.align	2
+  25              		.global	findAmp
+  26              		.thumb
+  27              		.thumb_func
+  28              		.type	findAmp, %function
+  29              	findAmp:
+  30              	.LFB688:
+  31              		.file 1 "Calculations.c"
+   1:Calculations.c **** /* ========================================
+   2:Calculations.c ****  *
+   3:Calculations.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:Calculations.c ****  * All Rights Reserved
+   5:Calculations.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:Calculations.c ****  *
+   7:Calculations.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:Calculations.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:Calculations.c ****  *
+  10:Calculations.c ****  * ========================================
+  11:Calculations.c **** */
+  12:Calculations.c **** 
+  13:Calculations.c **** #include <TinyScope.h>
+  14:Calculations.c **** #include "project.h"
+  15:Calculations.c **** #include "string.h"
+  16:Calculations.c **** #include "math.h"
+  17:Calculations.c **** #include "stdio.h"
+  18:Calculations.c **** #include "stdlib.h"
+  19:Calculations.c **** 
+  20:Calculations.c **** /****************************************************
+  21:Calculations.c ****  *
+  22:Calculations.c ****  * CALCULATION FUNCTIONS
+  23:Calculations.c ****  *
+  24:Calculations.c **** ****************************************************/
+  25:Calculations.c **** 
+  26:Calculations.c **** // converts the data into something that can be displayed on screen
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 2
+
+
+  27:Calculations.c **** int findAmp(double psy, int data)
+  28:Calculations.c **** {
+  32              		.loc 1 28 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 0, uses_anonymous_args = 0
+  36              	.LVL0:
+  37 0000 70B5     		push	{r4, r5, r6, lr}
+  38              		.cfi_def_cfa_offset 16
+  39              		.cfi_offset 4, -16
+  40              		.cfi_offset 5, -12
+  41              		.cfi_offset 6, -8
+  42              		.cfi_offset 14, -4
+  43 0002 1646     		mov	r6, r2
+  29:Calculations.c ****     double d = 1.0 * (psy) * 3300 * data / 4096;
+  44              		.loc 1 29 0
+  45 0004 0BA3     		adr	r3, .L3+4
+  46 0006 D3E90023 		ldrd	r2, [r3]
+  47              	.LVL1:
+  48 000a FFF7FEFF 		bl	__aeabi_dmul
+  49              	.LVL2:
+  50 000e 0446     		mov	r4, r0
+  51 0010 0D46     		mov	r5, r1
+  52 0012 3046     		mov	r0, r6
+  53 0014 FFF7FEFF 		bl	__aeabi_i2d
+  54              	.LVL3:
+  55 0018 2246     		mov	r2, r4
+  56 001a 2B46     		mov	r3, r5
+  57 001c FFF7FEFF 		bl	__aeabi_dmul
+  58              	.LVL4:
+  59 0020 0022     		movs	r2, #0
+  60 0022 034B     		ldr	r3, .L3
+  61 0024 FFF7FEFF 		bl	__aeabi_dmul
+  62              	.LVL5:
+  30:Calculations.c ****     
+  31:Calculations.c ****     // create a map to map 0-256 to 10-150
+  32:Calculations.c ****     // will be affected by yscale
+  33:Calculations.c ****     //double slope = 1.0 * (212 - 0) / (256 - 0);
+  34:Calculations.c ****     //d = 0 + (slope * (d));
+  35:Calculations.c ****     //d = floor(d + 0.5);
+  36:Calculations.c ****     return (int) d;
+  63              		.loc 1 36 0
+  64 0028 FFF7FEFF 		bl	__aeabi_d2iz
+  65              	.LVL6:
+  37:Calculations.c **** }
+  66              		.loc 1 37 0
+  67 002c 70BD     		pop	{r4, r5, r6, pc}
+  68              	.LVL7:
+  69              	.L4:
+  70 002e 00BF     		.align	3
+  71              	.L3:
+  72 0030 0000303F 		.word	1060110336
+  73 0034 00000000 		.word	0
+  74 0038 00C8A940 		.word	1084868608
+  75              		.cfi_endproc
+  76              	.LFE688:
+  77              		.size	findAmp, .-findAmp
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 3
+
+
+  78              		.section	.text.findSlope,"ax",%progbits
+  79              		.align	2
+  80              		.global	findSlope
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	findSlope, %function
+  84              	findSlope:
+  85              	.LFB690:
+  38:Calculations.c **** 
+  39:Calculations.c **** // returns idx if edge has been detected, otherwise returns FALSE
+  40:Calculations.c **** int triggerDetection(Settings config, int *data, double psy)
+  41:Calculations.c **** {
+  42:Calculations.c ****     int *d;
+  43:Calculations.c ****     d = avgSmoothing(data, psy);
+  44:Calculations.c ****     int i = 0;
+  45:Calculations.c ****     int tlevel = findAmp(psy, config.trigl);
+  46:Calculations.c ****     for (; i < MAX_SIZE; i++){
+  47:Calculations.c ****         if (i > 0 && i < MAX_SIZE){
+  48:Calculations.c ****             if (config.slope == POS_SLOPE){
+  49:Calculations.c ****                 if (d[i-1] < tlevel && d[i] >= tlevel && findSlope(d[i-1], d[i]) > 0){
+  50:Calculations.c ****                     return i;
+  51:Calculations.c ****                 }
+  52:Calculations.c ****             } else if (config.slope == NEG_SLOPE){
+  53:Calculations.c ****                 if (d[i-1] > tlevel && d[i] <= tlevel && findSlope(d[i-1], d[i]) < 0){
+  54:Calculations.c ****                     return i;
+  55:Calculations.c ****                 }
+  56:Calculations.c ****             }
+  57:Calculations.c ****         }
+  58:Calculations.c ****     }
+  59:Calculations.c ****     return FALSE;
+  60:Calculations.c **** }
+  61:Calculations.c **** 
+  62:Calculations.c **** int findSlope(int p1, int p2)
+  63:Calculations.c **** {
+  86              		.loc 1 63 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91              	.LVL8:
+  64:Calculations.c ****     return p2 - p1;
+  65:Calculations.c **** }
+  92              		.loc 1 65 0
+  93 0000 081A     		subs	r0, r1, r0
+  94              	.LVL9:
+  95 0002 7047     		bx	lr
+  96              		.cfi_endproc
+  97              	.LFE690:
+  98              		.size	findSlope, .-findSlope
+  99              		.section	.text.avgSmoothing,"ax",%progbits
+ 100              		.align	2
+ 101              		.global	avgSmoothing
+ 102              		.thumb
+ 103              		.thumb_func
+ 104              		.type	avgSmoothing, %function
+ 105              	avgSmoothing:
+ 106              	.LFB691:
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 4
+
+
+  66:Calculations.c **** 
+  67:Calculations.c **** // helper function to triggerDetection
+  68:Calculations.c **** int *avgSmoothing(int *data, double psy)
+  69:Calculations.c **** {
+ 107              		.loc 1 69 0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 1024
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111              	.LVL10:
+ 112 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 113              		.cfi_def_cfa_offset 20
+ 114              		.cfi_offset 4, -20
+ 115              		.cfi_offset 5, -16
+ 116              		.cfi_offset 6, -12
+ 117              		.cfi_offset 7, -8
+ 118              		.cfi_offset 14, -4
+ 119 0002 ADF2044D 		subw	sp, sp, #1028
+ 120              		.cfi_def_cfa_offset 1048
+ 121 0006 0546     		mov	r5, r0
+ 122 0008 1646     		mov	r6, r2
+ 123 000a 1F46     		mov	r7, r3
+ 124              	.LVL11:
+  70:Calculations.c ****     // running avg - stores data in new array and returns it
+  71:Calculations.c ****     int c[MAX_SIZE];
+  72:Calculations.c ****     static int d[MAX_SIZE];
+  73:Calculations.c ****     int i = 0;
+ 125              		.loc 1 73 0
+ 126 000c 0024     		movs	r4, #0
+  74:Calculations.c ****     for (; i < MAX_SIZE; i++){
+ 127              		.loc 1 74 0
+ 128 000e 2FE0     		b	.L7
+ 129              	.LVL12:
+ 130              	.L10:
+  75:Calculations.c ****         c[i] = findAmp(psy, data[i] & BITMASKADC);
+ 131              		.loc 1 75 0
+ 132 0010 55F82420 		ldr	r2, [r5, r4, lsl #2]
+ 133 0014 C2F30B02 		ubfx	r2, r2, #0, #12
+ 134 0018 3046     		mov	r0, r6
+ 135 001a 3946     		mov	r1, r7
+ 136 001c FFF7FEFF 		bl	findAmp
+ 137              	.LVL13:
+ 138 0020 4DF82400 		str	r0, [sp, r4, lsl #2]
+  76:Calculations.c ****         if (i > 4 && i < MAX_SIZE){
+ 139              		.loc 1 76 0
+ 140 0024 631F     		subs	r3, r4, #5
+ 141 0026 FA2B     		cmp	r3, #250
+ 142 0028 1CD8     		bhi	.L8
+  77:Calculations.c ****             d[i] = (c[i-4] + (2 * c[i-3]) + (3 * c[i-2]) + (2 * c[i-1]) + c[i]) / 9;
+ 143              		.loc 1 77 0
+ 144 002a 231F     		subs	r3, r4, #4
+ 145 002c 5DF82330 		ldr	r3, [sp, r3, lsl #2]
+ 146 0030 E21E     		subs	r2, r4, #3
+ 147 0032 5DF82220 		ldr	r2, [sp, r2, lsl #2]
+ 148 0036 03EB4202 		add	r2, r3, r2, lsl #1
+ 149 003a A31E     		subs	r3, r4, #2
+ 150 003c 5DF82330 		ldr	r3, [sp, r3, lsl #2]
+ 151 0040 03EB4303 		add	r3, r3, r3, lsl #1
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 5
+
+
+ 152 0044 1344     		add	r3, r3, r2
+ 153 0046 621E     		subs	r2, r4, #1
+ 154 0048 5DF82220 		ldr	r2, [sp, r2, lsl #2]
+ 155 004c 03EB4203 		add	r3, r3, r2, lsl #1
+ 156 0050 0344     		add	r3, r3, r0
+ 157 0052 0A4A     		ldr	r2, .L12
+ 158 0054 82FB0312 		smull	r1, r2, r2, r3
+ 159 0058 DB17     		asrs	r3, r3, #31
+ 160 005a C3EB6203 		rsb	r3, r3, r2, asr #1
+ 161 005e 084A     		ldr	r2, .L12+4
+ 162 0060 42F82430 		str	r3, [r2, r4, lsl #2]
+ 163              	.L8:
+  78:Calculations.c ****         }
+  79:Calculations.c ****         if (i < 4) d[i] = c[i];
+ 164              		.loc 1 79 0
+ 165 0064 032C     		cmp	r4, #3
+ 166 0066 02DC     		bgt	.L9
+ 167              		.loc 1 79 0 is_stmt 0 discriminator 1
+ 168 0068 054B     		ldr	r3, .L12+4
+ 169 006a 43F82400 		str	r0, [r3, r4, lsl #2]
+ 170              	.L9:
+  74:Calculations.c ****         c[i] = findAmp(psy, data[i] & BITMASKADC);
+ 171              		.loc 1 74 0 is_stmt 1
+ 172 006e 0134     		adds	r4, r4, #1
+ 173              	.LVL14:
+ 174              	.L7:
+  74:Calculations.c ****         c[i] = findAmp(psy, data[i] & BITMASKADC);
+ 175              		.loc 1 74 0 is_stmt 0 discriminator 1
+ 176 0070 FF2C     		cmp	r4, #255
+ 177 0072 CDDD     		ble	.L10
+  80:Calculations.c ****     }
+  81:Calculations.c ****     return d;
+  82:Calculations.c **** }
+ 178              		.loc 1 82 0 is_stmt 1
+ 179 0074 0248     		ldr	r0, .L12+4
+ 180 0076 0DF2044D 		addw	sp, sp, #1028
+ 181              		.cfi_def_cfa_offset 20
+ 182              		@ sp needed
+ 183 007a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 184              	.LVL15:
+ 185              	.L13:
+ 186              		.align	2
+ 187              	.L12:
+ 188 007c 398EE338 		.word	954437177
+ 189 0080 00000000 		.word	.LANCHOR0
+ 190              		.cfi_endproc
+ 191              	.LFE691:
+ 192              		.size	avgSmoothing, .-avgSmoothing
+ 193              		.section	.text.triggerDetection,"ax",%progbits
+ 194              		.align	2
+ 195              		.global	triggerDetection
+ 196              		.thumb
+ 197              		.thumb_func
+ 198              		.type	triggerDetection, %function
+ 199              	triggerDetection:
+ 200              	.LFB689:
+  41:Calculations.c ****     int *d;
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 6
+
+
+ 201              		.loc 1 41 0
+ 202              		.cfi_startproc
+ 203              		@ args = 48, pretend = 16, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205              	.LVL16:
+ 206 0000 84B0     		sub	sp, sp, #16
+ 207              		.cfi_def_cfa_offset 16
+ 208 0002 70B5     		push	{r4, r5, r6, lr}
+ 209              		.cfi_def_cfa_offset 32
+ 210              		.cfi_offset 4, -32
+ 211              		.cfi_offset 5, -28
+ 212              		.cfi_offset 6, -24
+ 213              		.cfi_offset 14, -20
+ 214 0004 04AC     		add	r4, sp, #16
+ 215 0006 84E80F00 		stmia	r4, {r0, r1, r2, r3}
+  43:Calculations.c ****     int i = 0;
+ 216              		.loc 1 43 0
+ 217 000a DDE90E23 		ldrd	r2, [sp, #56]
+ 218 000e 0C98     		ldr	r0, [sp, #48]
+ 219 0010 FFF7FEFF 		bl	avgSmoothing
+ 220              	.LVL17:
+ 221 0014 0646     		mov	r6, r0
+ 222              	.LVL18:
+  45:Calculations.c ****     for (; i < MAX_SIZE; i++){
+ 223              		.loc 1 45 0
+ 224 0016 0A9A     		ldr	r2, [sp, #40]
+ 225 0018 DDE90E01 		ldrd	r0, [sp, #56]
+ 226              	.LVL19:
+ 227 001c FFF7FEFF 		bl	findAmp
+ 228              	.LVL20:
+ 229 0020 0546     		mov	r5, r0
+ 230              	.LVL21:
+  44:Calculations.c ****     int tlevel = findAmp(psy, config.trigl);
+ 231              		.loc 1 44 0
+ 232 0022 0024     		movs	r4, #0
+  46:Calculations.c ****         if (i > 0 && i < MAX_SIZE){
+ 233              		.loc 1 46 0
+ 234 0024 28E0     		b	.L15
+ 235              	.LVL22:
+ 236              	.L19:
+  47:Calculations.c ****             if (config.slope == POS_SLOPE){
+ 237              		.loc 1 47 0
+ 238 0026 631E     		subs	r3, r4, #1
+ 239 0028 FE2B     		cmp	r3, #254
+ 240 002a 24D8     		bhi	.L16
+  48:Calculations.c ****                 if (d[i-1] < tlevel && d[i] >= tlevel && findSlope(d[i-1], d[i]) > 0){
+ 241              		.loc 1 48 0
+ 242 002c 099B     		ldr	r3, [sp, #36]
+ 243 002e 012B     		cmp	r3, #1
+ 244 0030 0FD1     		bne	.L17
+  49:Calculations.c ****                     return i;
+ 245              		.loc 1 49 0
+ 246 0032 04F18043 		add	r3, r4, #1073741824
+ 247 0036 013B     		subs	r3, r3, #1
+ 248 0038 56F82300 		ldr	r0, [r6, r3, lsl #2]
+ 249 003c 8542     		cmp	r5, r0
+ 250 003e 1ADD     		ble	.L16
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 7
+
+
+  49:Calculations.c ****                     return i;
+ 251              		.loc 1 49 0 is_stmt 0 discriminator 1
+ 252 0040 56F82410 		ldr	r1, [r6, r4, lsl #2]
+ 253 0044 8D42     		cmp	r5, r1
+ 254 0046 16DC     		bgt	.L16
+  49:Calculations.c ****                     return i;
+ 255              		.loc 1 49 0 discriminator 2
+ 256 0048 FFF7FEFF 		bl	findSlope
+ 257              	.LVL23:
+ 258 004c 0028     		cmp	r0, #0
+ 259 004e 12DD     		ble	.L16
+ 260 0050 16E0     		b	.L20
+ 261              	.L17:
+  52:Calculations.c ****                 if (d[i-1] > tlevel && d[i] <= tlevel && findSlope(d[i-1], d[i]) < 0){
+ 262              		.loc 1 52 0 is_stmt 1
+ 263 0052 B3F1FF3F 		cmp	r3, #-1
+ 264 0056 0ED1     		bne	.L16
+  53:Calculations.c ****                     return i;
+ 265              		.loc 1 53 0
+ 266 0058 04F18043 		add	r3, r4, #1073741824
+ 267 005c 013B     		subs	r3, r3, #1
+ 268 005e 56F82300 		ldr	r0, [r6, r3, lsl #2]
+ 269 0062 8542     		cmp	r5, r0
+ 270 0064 07DA     		bge	.L16
+  53:Calculations.c ****                     return i;
+ 271              		.loc 1 53 0 is_stmt 0 discriminator 1
+ 272 0066 56F82410 		ldr	r1, [r6, r4, lsl #2]
+ 273 006a 8D42     		cmp	r5, r1
+ 274 006c 03DB     		blt	.L16
+  53:Calculations.c ****                     return i;
+ 275              		.loc 1 53 0 discriminator 2
+ 276 006e FFF7FEFF 		bl	findSlope
+ 277              	.LVL24:
+ 278 0072 0028     		cmp	r0, #0
+ 279 0074 06DB     		blt	.L21
+ 280              	.L16:
+  46:Calculations.c ****         if (i > 0 && i < MAX_SIZE){
+ 281              		.loc 1 46 0 is_stmt 1
+ 282 0076 0134     		adds	r4, r4, #1
+ 283              	.LVL25:
+ 284              	.L15:
+  46:Calculations.c ****         if (i > 0 && i < MAX_SIZE){
+ 285              		.loc 1 46 0 is_stmt 0 discriminator 1
+ 286 0078 FF2C     		cmp	r4, #255
+ 287 007a D4DD     		ble	.L19
+  59:Calculations.c **** }
+ 288              		.loc 1 59 0 is_stmt 1
+ 289 007c 0020     		movs	r0, #0
+ 290 007e 02E0     		b	.L18
+ 291              	.L20:
+  50:Calculations.c ****                 }
+ 292              		.loc 1 50 0
+ 293 0080 2046     		mov	r0, r4
+ 294 0082 00E0     		b	.L18
+ 295              	.L21:
+  54:Calculations.c ****                 }
+ 296              		.loc 1 54 0
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 8
+
+
+ 297 0084 2046     		mov	r0, r4
+ 298              	.L18:
+  60:Calculations.c **** 
+ 299              		.loc 1 60 0
+ 300 0086 BDE87040 		pop	{r4, r5, r6, lr}
+ 301              		.cfi_restore 14
+ 302              		.cfi_restore 6
+ 303              		.cfi_restore 5
+ 304              		.cfi_restore 4
+ 305              		.cfi_def_cfa_offset 16
+ 306              	.LVL26:
+ 307 008a 04B0     		add	sp, sp, #16
+ 308              		.cfi_def_cfa_offset 0
+ 309 008c 7047     		bx	lr
+ 310              		.cfi_endproc
+ 311              	.LFE689:
+ 312              		.size	triggerDetection, .-triggerDetection
+ 313 008e 00BF     		.bss
+ 314              		.align	2
+ 315              		.set	.LANCHOR0,. + 0
+ 316              		.type	d.21990, %object
+ 317              		.size	d.21990, 1024
+ 318              	d.21990:
+ 319 0000 00000000 		.space	1024
+ 319      00000000 
+ 319      00000000 
+ 319      00000000 
+ 319      00000000 
+ 320              		.text
+ 321              	.Letext0:
+ 322              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 323              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 324              		.file 4 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/device/cy_device.h"
+ 325              		.file 5 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/sar/cy_sar.h"
+ 326              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/scb/cy_scb_uart.h"
+ 327              		.file 7 "Generated_Source\\PSoC6/ADC.h"
+ 328              		.file 8 "./TinyScope.h"
+ 329              		.file 9 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
+ 330              		.file 10 "Generated_Source\\PSoC6/UART.h"
+ 331              		.section	.debug_info,"",%progbits
+ 332              	.Ldebug_info0:
+ 333 0000 480A0000 		.4byte	0xa48
+ 334 0004 0400     		.2byte	0x4
+ 335 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 336 000a 04       		.byte	0x4
+ 337 000b 01       		.uleb128 0x1
+ 338 000c 54060000 		.4byte	.LASF180
+ 339 0010 0C       		.byte	0xc
+ 340 0011 3C000000 		.4byte	.LASF181
+ 341 0015 F4090000 		.4byte	.LASF182
+ 342 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 343 001d 00000000 		.4byte	0
+ 344 0021 00000000 		.4byte	.Ldebug_line0
+ 345 0025 02       		.uleb128 0x2
+ 346 0026 08       		.byte	0x8
+ 347 0027 04       		.byte	0x4
+ 348 0028 DE020000 		.4byte	.LASF0
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 9
+
+
+ 349 002c 02       		.uleb128 0x2
+ 350 002d 02       		.byte	0x2
+ 351 002e 05       		.byte	0x5
+ 352 002f BA070000 		.4byte	.LASF1
+ 353 0033 02       		.uleb128 0x2
+ 354 0034 01       		.byte	0x1
+ 355 0035 06       		.byte	0x6
+ 356 0036 CF010000 		.4byte	.LASF2
+ 357 003a 03       		.uleb128 0x3
+ 358 003b BE000000 		.4byte	.LASF4
+ 359 003f 02       		.byte	0x2
+ 360 0040 1D       		.byte	0x1d
+ 361 0041 45000000 		.4byte	0x45
+ 362 0045 02       		.uleb128 0x2
+ 363 0046 01       		.byte	0x1
+ 364 0047 08       		.byte	0x8
+ 365 0048 98070000 		.4byte	.LASF3
+ 366 004c 03       		.uleb128 0x3
+ 367 004d 86030000 		.4byte	.LASF5
+ 368 0051 02       		.byte	0x2
+ 369 0052 29       		.byte	0x29
+ 370 0053 2C000000 		.4byte	0x2c
+ 371 0057 03       		.uleb128 0x3
+ 372 0058 8B080000 		.4byte	.LASF6
+ 373 005c 02       		.byte	0x2
+ 374 005d 2B       		.byte	0x2b
+ 375 005e 62000000 		.4byte	0x62
+ 376 0062 02       		.uleb128 0x2
+ 377 0063 02       		.byte	0x2
+ 378 0064 07       		.byte	0x7
+ 379 0065 2D030000 		.4byte	.LASF7
+ 380 0069 03       		.uleb128 0x3
+ 381 006a A9080000 		.4byte	.LASF8
+ 382 006e 02       		.byte	0x2
+ 383 006f 3F       		.byte	0x3f
+ 384 0070 74000000 		.4byte	0x74
+ 385 0074 02       		.uleb128 0x2
+ 386 0075 04       		.byte	0x4
+ 387 0076 05       		.byte	0x5
+ 388 0077 78020000 		.4byte	.LASF9
+ 389 007b 03       		.uleb128 0x3
+ 390 007c 5F030000 		.4byte	.LASF10
+ 391 0080 02       		.byte	0x2
+ 392 0081 41       		.byte	0x41
+ 393 0082 86000000 		.4byte	0x86
+ 394 0086 02       		.uleb128 0x2
+ 395 0087 04       		.byte	0x4
+ 396 0088 07       		.byte	0x7
+ 397 0089 1D040000 		.4byte	.LASF11
+ 398 008d 02       		.uleb128 0x2
+ 399 008e 08       		.byte	0x8
+ 400 008f 05       		.byte	0x5
+ 401 0090 C1010000 		.4byte	.LASF12
+ 402 0094 02       		.uleb128 0x2
+ 403 0095 08       		.byte	0x8
+ 404 0096 07       		.byte	0x7
+ 405 0097 2B010000 		.4byte	.LASF13
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 10
+
+
+ 406 009b 04       		.uleb128 0x4
+ 407 009c 04       		.byte	0x4
+ 408 009d 05       		.byte	0x5
+ 409 009e 696E7400 		.ascii	"int\000"
+ 410 00a2 02       		.uleb128 0x2
+ 411 00a3 04       		.byte	0x4
+ 412 00a4 07       		.byte	0x7
+ 413 00a5 D8030000 		.4byte	.LASF14
+ 414 00a9 03       		.uleb128 0x3
+ 415 00aa 91090000 		.4byte	.LASF15
+ 416 00ae 03       		.byte	0x3
+ 417 00af 18       		.byte	0x18
+ 418 00b0 3A000000 		.4byte	0x3a
+ 419 00b4 03       		.uleb128 0x3
+ 420 00b5 A5010000 		.4byte	.LASF16
+ 421 00b9 03       		.byte	0x3
+ 422 00ba 20       		.byte	0x20
+ 423 00bb 4C000000 		.4byte	0x4c
+ 424 00bf 03       		.uleb128 0x3
+ 425 00c0 E5030000 		.4byte	.LASF17
+ 426 00c4 03       		.byte	0x3
+ 427 00c5 24       		.byte	0x24
+ 428 00c6 57000000 		.4byte	0x57
+ 429 00ca 03       		.uleb128 0x3
+ 430 00cb 90070000 		.4byte	.LASF18
+ 431 00cf 03       		.byte	0x3
+ 432 00d0 2C       		.byte	0x2c
+ 433 00d1 69000000 		.4byte	0x69
+ 434 00d5 03       		.uleb128 0x3
+ 435 00d6 16080000 		.4byte	.LASF19
+ 436 00da 03       		.byte	0x3
+ 437 00db 30       		.byte	0x30
+ 438 00dc 7B000000 		.4byte	0x7b
+ 439 00e0 02       		.uleb128 0x2
+ 440 00e1 04       		.byte	0x4
+ 441 00e2 07       		.byte	0x7
+ 442 00e3 8E050000 		.4byte	.LASF20
+ 443 00e7 05       		.uleb128 0x5
+ 444 00e8 D5000000 		.4byte	0xd5
+ 445 00ec 02       		.uleb128 0x2
+ 446 00ed 08       		.byte	0x8
+ 447 00ee 04       		.byte	0x4
+ 448 00ef 40080000 		.4byte	.LASF21
+ 449 00f3 06       		.uleb128 0x6
+ 450 00f4 B8       		.byte	0xb8
+ 451 00f5 04       		.byte	0x4
+ 452 00f6 34       		.byte	0x34
+ 453 00f7 04050000 		.4byte	0x504
+ 454 00fb 07       		.uleb128 0x7
+ 455 00fc 00010000 		.4byte	.LASF22
+ 456 0100 04       		.byte	0x4
+ 457 0101 37       		.byte	0x37
+ 458 0102 D5000000 		.4byte	0xd5
+ 459 0106 00       		.byte	0
+ 460 0107 07       		.uleb128 0x7
+ 461 0108 54030000 		.4byte	.LASF23
+ 462 010c 04       		.byte	0x4
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 11
+
+
+ 463 010d 38       		.byte	0x38
+ 464 010e D5000000 		.4byte	0xd5
+ 465 0112 04       		.byte	0x4
+ 466 0113 07       		.uleb128 0x7
+ 467 0114 A1020000 		.4byte	.LASF24
+ 468 0118 04       		.byte	0x4
+ 469 0119 39       		.byte	0x39
+ 470 011a D5000000 		.4byte	0xd5
+ 471 011e 08       		.byte	0x8
+ 472 011f 07       		.uleb128 0x7
+ 473 0120 69070000 		.4byte	.LASF25
+ 474 0124 04       		.byte	0x4
+ 475 0125 3A       		.byte	0x3a
+ 476 0126 D5000000 		.4byte	0xd5
+ 477 012a 0C       		.byte	0xc
+ 478 012b 07       		.uleb128 0x7
+ 479 012c 1E020000 		.4byte	.LASF26
+ 480 0130 04       		.byte	0x4
+ 481 0131 3B       		.byte	0x3b
+ 482 0132 D5000000 		.4byte	0xd5
+ 483 0136 10       		.byte	0x10
+ 484 0137 07       		.uleb128 0x7
+ 485 0138 56020000 		.4byte	.LASF27
+ 486 013c 04       		.byte	0x4
+ 487 013d 3C       		.byte	0x3c
+ 488 013e D5000000 		.4byte	0xd5
+ 489 0142 14       		.byte	0x14
+ 490 0143 07       		.uleb128 0x7
+ 491 0144 66040000 		.4byte	.LASF28
+ 492 0148 04       		.byte	0x4
+ 493 0149 3D       		.byte	0x3d
+ 494 014a D5000000 		.4byte	0xd5
+ 495 014e 18       		.byte	0x18
+ 496 014f 07       		.uleb128 0x7
+ 497 0150 A0000000 		.4byte	.LASF29
+ 498 0154 04       		.byte	0x4
+ 499 0155 3E       		.byte	0x3e
+ 500 0156 D5000000 		.4byte	0xd5
+ 501 015a 1C       		.byte	0x1c
+ 502 015b 07       		.uleb128 0x7
+ 503 015c 700A0000 		.4byte	.LASF30
+ 504 0160 04       		.byte	0x4
+ 505 0161 3F       		.byte	0x3f
+ 506 0162 D5000000 		.4byte	0xd5
+ 507 0166 20       		.byte	0x20
+ 508 0167 07       		.uleb128 0x7
+ 509 0168 2E060000 		.4byte	.LASF31
+ 510 016c 04       		.byte	0x4
+ 511 016d 40       		.byte	0x40
+ 512 016e D5000000 		.4byte	0xd5
+ 513 0172 24       		.byte	0x24
+ 514 0173 07       		.uleb128 0x7
+ 515 0174 60050000 		.4byte	.LASF32
+ 516 0178 04       		.byte	0x4
+ 517 0179 43       		.byte	0x43
+ 518 017a A9000000 		.4byte	0xa9
+ 519 017e 28       		.byte	0x28
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 12
+
+
+ 520 017f 07       		.uleb128 0x7
+ 521 0180 86000000 		.4byte	.LASF33
+ 522 0184 04       		.byte	0x4
+ 523 0185 44       		.byte	0x44
+ 524 0186 A9000000 		.4byte	0xa9
+ 525 018a 29       		.byte	0x29
+ 526 018b 07       		.uleb128 0x7
+ 527 018c 660A0000 		.4byte	.LASF34
+ 528 0190 04       		.byte	0x4
+ 529 0191 45       		.byte	0x45
+ 530 0192 A9000000 		.4byte	0xa9
+ 531 0196 2A       		.byte	0x2a
+ 532 0197 07       		.uleb128 0x7
+ 533 0198 20060000 		.4byte	.LASF35
+ 534 019c 04       		.byte	0x4
+ 535 019d 46       		.byte	0x46
+ 536 019e A9000000 		.4byte	0xa9
+ 537 01a2 2B       		.byte	0x2b
+ 538 01a3 07       		.uleb128 0x7
+ 539 01a4 CD040000 		.4byte	.LASF36
+ 540 01a8 04       		.byte	0x4
+ 541 01a9 47       		.byte	0x47
+ 542 01aa A9000000 		.4byte	0xa9
+ 543 01ae 2C       		.byte	0x2c
+ 544 01af 07       		.uleb128 0x7
+ 545 01b0 B3080000 		.4byte	.LASF37
+ 546 01b4 04       		.byte	0x4
+ 547 01b5 48       		.byte	0x48
+ 548 01b6 A9000000 		.4byte	0xa9
+ 549 01ba 2D       		.byte	0x2d
+ 550 01bb 07       		.uleb128 0x7
+ 551 01bc 27020000 		.4byte	.LASF38
+ 552 01c0 04       		.byte	0x4
+ 553 01c1 49       		.byte	0x49
+ 554 01c2 A9000000 		.4byte	0xa9
+ 555 01c6 2E       		.byte	0x2e
+ 556 01c7 07       		.uleb128 0x7
+ 557 01c8 6D050000 		.4byte	.LASF39
+ 558 01cc 04       		.byte	0x4
+ 559 01cd 4A       		.byte	0x4a
+ 560 01ce A9000000 		.4byte	0xa9
+ 561 01d2 2F       		.byte	0x2f
+ 562 01d3 07       		.uleb128 0x7
+ 563 01d4 51080000 		.4byte	.LASF40
+ 564 01d8 04       		.byte	0x4
+ 565 01d9 4B       		.byte	0x4b
+ 566 01da A9000000 		.4byte	0xa9
+ 567 01de 30       		.byte	0x30
+ 568 01df 07       		.uleb128 0x7
+ 569 01e0 5B040000 		.4byte	.LASF41
+ 570 01e4 04       		.byte	0x4
+ 571 01e5 4E       		.byte	0x4e
+ 572 01e6 A9000000 		.4byte	0xa9
+ 573 01ea 31       		.byte	0x31
+ 574 01eb 07       		.uleb128 0x7
+ 575 01ec B0000000 		.4byte	.LASF42
+ 576 01f0 04       		.byte	0x4
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 13
+
+
+ 577 01f1 4F       		.byte	0x4f
+ 578 01f2 A9000000 		.4byte	0xa9
+ 579 01f6 32       		.byte	0x32
+ 580 01f7 07       		.uleb128 0x7
+ 581 01f8 CC030000 		.4byte	.LASF43
+ 582 01fc 04       		.byte	0x4
+ 583 01fd 50       		.byte	0x50
+ 584 01fe A9000000 		.4byte	0xa9
+ 585 0202 33       		.byte	0x33
+ 586 0203 07       		.uleb128 0x7
+ 587 0204 A2050000 		.4byte	.LASF44
+ 588 0208 04       		.byte	0x4
+ 589 0209 51       		.byte	0x51
+ 590 020a A9000000 		.4byte	0xa9
+ 591 020e 34       		.byte	0x34
+ 592 020f 07       		.uleb128 0x7
+ 593 0210 10090000 		.4byte	.LASF45
+ 594 0214 04       		.byte	0x4
+ 595 0215 52       		.byte	0x52
+ 596 0216 B4000000 		.4byte	0xb4
+ 597 021a 36       		.byte	0x36
+ 598 021b 07       		.uleb128 0x7
+ 599 021c D3020000 		.4byte	.LASF46
+ 600 0220 04       		.byte	0x4
+ 601 0221 53       		.byte	0x53
+ 602 0222 B4000000 		.4byte	0xb4
+ 603 0226 38       		.byte	0x38
+ 604 0227 07       		.uleb128 0x7
+ 605 0228 5B090000 		.4byte	.LASF47
+ 606 022c 04       		.byte	0x4
+ 607 022d 54       		.byte	0x54
+ 608 022e B4000000 		.4byte	0xb4
+ 609 0232 3A       		.byte	0x3a
+ 610 0233 07       		.uleb128 0x7
+ 611 0234 47020000 		.4byte	.LASF48
+ 612 0238 04       		.byte	0x4
+ 613 0239 55       		.byte	0x55
+ 614 023a A9000000 		.4byte	0xa9
+ 615 023e 3C       		.byte	0x3c
+ 616 023f 07       		.uleb128 0x7
+ 617 0240 FA020000 		.4byte	.LASF49
+ 618 0244 04       		.byte	0x4
+ 619 0245 56       		.byte	0x56
+ 620 0246 A9000000 		.4byte	0xa9
+ 621 024a 3D       		.byte	0x3d
+ 622 024b 07       		.uleb128 0x7
+ 623 024c EE070000 		.4byte	.LASF50
+ 624 0250 04       		.byte	0x4
+ 625 0251 57       		.byte	0x57
+ 626 0252 A9000000 		.4byte	0xa9
+ 627 0256 3E       		.byte	0x3e
+ 628 0257 07       		.uleb128 0x7
+ 629 0258 94000000 		.4byte	.LASF51
+ 630 025c 04       		.byte	0x4
+ 631 025d 58       		.byte	0x58
+ 632 025e A9000000 		.4byte	0xa9
+ 633 0262 3F       		.byte	0x3f
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 14
+
+
+ 634 0263 07       		.uleb128 0x7
+ 635 0264 39060000 		.4byte	.LASF52
+ 636 0268 04       		.byte	0x4
+ 637 0269 59       		.byte	0x59
+ 638 026a A9000000 		.4byte	0xa9
+ 639 026e 40       		.byte	0x40
+ 640 026f 07       		.uleb128 0x7
+ 641 0270 6A030000 		.4byte	.LASF53
+ 642 0274 04       		.byte	0x4
+ 643 0275 5A       		.byte	0x5a
+ 644 0276 A9000000 		.4byte	0xa9
+ 645 027a 41       		.byte	0x41
+ 646 027b 07       		.uleb128 0x7
+ 647 027c 12050000 		.4byte	.LASF54
+ 648 0280 04       		.byte	0x4
+ 649 0281 5B       		.byte	0x5b
+ 650 0282 A9000000 		.4byte	0xa9
+ 651 0286 42       		.byte	0x42
+ 652 0287 07       		.uleb128 0x7
+ 653 0288 04060000 		.4byte	.LASF55
+ 654 028c 04       		.byte	0x4
+ 655 028d 5C       		.byte	0x5c
+ 656 028e A9000000 		.4byte	0xa9
+ 657 0292 43       		.byte	0x43
+ 658 0293 07       		.uleb128 0x7
+ 659 0294 AA020000 		.4byte	.LASF56
+ 660 0298 04       		.byte	0x4
+ 661 0299 5D       		.byte	0x5d
+ 662 029a A9000000 		.4byte	0xa9
+ 663 029e 44       		.byte	0x44
+ 664 029f 07       		.uleb128 0x7
+ 665 02a0 00000000 		.4byte	.LASF57
+ 666 02a4 04       		.byte	0x4
+ 667 02a5 5E       		.byte	0x5e
+ 668 02a6 D5000000 		.4byte	0xd5
+ 669 02aa 48       		.byte	0x48
+ 670 02ab 07       		.uleb128 0x7
+ 671 02ac 93020000 		.4byte	.LASF58
+ 672 02b0 04       		.byte	0x4
+ 673 02b1 5F       		.byte	0x5f
+ 674 02b2 D5000000 		.4byte	0xd5
+ 675 02b6 4C       		.byte	0x4c
+ 676 02b7 07       		.uleb128 0x7
+ 677 02b8 AE0A0000 		.4byte	.LASF59
+ 678 02bc 04       		.byte	0x4
+ 679 02bd 60       		.byte	0x60
+ 680 02be A9000000 		.4byte	0xa9
+ 681 02c2 50       		.byte	0x50
+ 682 02c3 07       		.uleb128 0x7
+ 683 02c4 7F010000 		.4byte	.LASF60
+ 684 02c8 04       		.byte	0x4
+ 685 02c9 61       		.byte	0x61
+ 686 02ca A9000000 		.4byte	0xa9
+ 687 02ce 51       		.byte	0x51
+ 688 02cf 07       		.uleb128 0x7
+ 689 02d0 70090000 		.4byte	.LASF61
+ 690 02d4 04       		.byte	0x4
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 15
+
+
+ 691 02d5 62       		.byte	0x62
+ 692 02d6 A9000000 		.4byte	0xa9
+ 693 02da 52       		.byte	0x52
+ 694 02db 07       		.uleb128 0x7
+ 695 02dc C0080000 		.4byte	.LASF62
+ 696 02e0 04       		.byte	0x4
+ 697 02e1 63       		.byte	0x63
+ 698 02e2 A9000000 		.4byte	0xa9
+ 699 02e6 53       		.byte	0x53
+ 700 02e7 07       		.uleb128 0x7
+ 701 02e8 FC070000 		.4byte	.LASF63
+ 702 02ec 04       		.byte	0x4
+ 703 02ed 64       		.byte	0x64
+ 704 02ee A9000000 		.4byte	0xa9
+ 705 02f2 54       		.byte	0x54
+ 706 02f3 07       		.uleb128 0x7
+ 707 02f4 91010000 		.4byte	.LASF64
+ 708 02f8 04       		.byte	0x4
+ 709 02f9 65       		.byte	0x65
+ 710 02fa A9000000 		.4byte	0xa9
+ 711 02fe 55       		.byte	0x55
+ 712 02ff 07       		.uleb128 0x7
+ 713 0300 09040000 		.4byte	.LASF65
+ 714 0304 04       		.byte	0x4
+ 715 0305 66       		.byte	0x66
+ 716 0306 A9000000 		.4byte	0xa9
+ 717 030a 56       		.byte	0x56
+ 718 030b 07       		.uleb128 0x7
+ 719 030c 6F040000 		.4byte	.LASF66
+ 720 0310 04       		.byte	0x4
+ 721 0311 67       		.byte	0x67
+ 722 0312 A9000000 		.4byte	0xa9
+ 723 0316 57       		.byte	0x57
+ 724 0317 07       		.uleb128 0x7
+ 725 0318 4B000000 		.4byte	.LASF67
+ 726 031c 04       		.byte	0x4
+ 727 031d 68       		.byte	0x68
+ 728 031e A9000000 		.4byte	0xa9
+ 729 0322 58       		.byte	0x58
+ 730 0323 07       		.uleb128 0x7
+ 731 0324 A6070000 		.4byte	.LASF68
+ 732 0328 04       		.byte	0x4
+ 733 0329 69       		.byte	0x69
+ 734 032a A9000000 		.4byte	0xa9
+ 735 032e 59       		.byte	0x59
+ 736 032f 07       		.uleb128 0x7
+ 737 0330 97050000 		.4byte	.LASF69
+ 738 0334 04       		.byte	0x4
+ 739 0335 6E       		.byte	0x6e
+ 740 0336 BF000000 		.4byte	0xbf
+ 741 033a 5A       		.byte	0x5a
+ 742 033b 07       		.uleb128 0x7
+ 743 033c F9080000 		.4byte	.LASF70
+ 744 0340 04       		.byte	0x4
+ 745 0341 6F       		.byte	0x6f
+ 746 0342 BF000000 		.4byte	0xbf
+ 747 0346 5C       		.byte	0x5c
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 16
+
+
+ 748 0347 07       		.uleb128 0x7
+ 749 0348 0A010000 		.4byte	.LASF71
+ 750 034c 04       		.byte	0x4
+ 751 034d 70       		.byte	0x70
+ 752 034e A9000000 		.4byte	0xa9
+ 753 0352 5E       		.byte	0x5e
+ 754 0353 07       		.uleb128 0x7
+ 755 0354 3B070000 		.4byte	.LASF72
+ 756 0358 04       		.byte	0x4
+ 757 0359 71       		.byte	0x71
+ 758 035a A9000000 		.4byte	0xa9
+ 759 035e 5F       		.byte	0x5f
+ 760 035f 07       		.uleb128 0x7
+ 761 0360 F3050000 		.4byte	.LASF73
+ 762 0364 04       		.byte	0x4
+ 763 0365 72       		.byte	0x72
+ 764 0366 A9000000 		.4byte	0xa9
+ 765 036a 60       		.byte	0x60
+ 766 036b 07       		.uleb128 0x7
+ 767 036c 14070000 		.4byte	.LASF74
+ 768 0370 04       		.byte	0x4
+ 769 0371 73       		.byte	0x73
+ 770 0372 D5000000 		.4byte	0xd5
+ 771 0376 64       		.byte	0x64
+ 772 0377 07       		.uleb128 0x7
+ 773 0378 42010000 		.4byte	.LASF75
+ 774 037c 04       		.byte	0x4
+ 775 037d 76       		.byte	0x76
+ 776 037e BF000000 		.4byte	0xbf
+ 777 0382 68       		.byte	0x68
+ 778 0383 07       		.uleb128 0x7
+ 779 0384 F7030000 		.4byte	.LASF76
+ 780 0388 04       		.byte	0x4
+ 781 0389 77       		.byte	0x77
+ 782 038a BF000000 		.4byte	0xbf
+ 783 038e 6A       		.byte	0x6a
+ 784 038f 07       		.uleb128 0x7
+ 785 0390 88040000 		.4byte	.LASF77
+ 786 0394 04       		.byte	0x4
+ 787 0395 78       		.byte	0x78
+ 788 0396 BF000000 		.4byte	0xbf
+ 789 039a 6C       		.byte	0x6c
+ 790 039b 07       		.uleb128 0x7
+ 791 039c C0040000 		.4byte	.LASF78
+ 792 03a0 04       		.byte	0x4
+ 793 03a1 79       		.byte	0x79
+ 794 03a2 BF000000 		.4byte	0xbf
+ 795 03a6 6E       		.byte	0x6e
+ 796 03a7 07       		.uleb128 0x7
+ 797 03a8 CE070000 		.4byte	.LASF79
+ 798 03ac 04       		.byte	0x4
+ 799 03ad 7B       		.byte	0x7b
+ 800 03ae A9000000 		.4byte	0xa9
+ 801 03b2 70       		.byte	0x70
+ 802 03b3 07       		.uleb128 0x7
+ 803 03b4 DB010000 		.4byte	.LASF80
+ 804 03b8 04       		.byte	0x4
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 17
+
+
+ 805 03b9 7C       		.byte	0x7c
+ 806 03ba A9000000 		.4byte	0xa9
+ 807 03be 71       		.byte	0x71
+ 808 03bf 07       		.uleb128 0x7
+ 809 03c0 800A0000 		.4byte	.LASF81
+ 810 03c4 04       		.byte	0x4
+ 811 03c5 7D       		.byte	0x7d
+ 812 03c6 A9000000 		.4byte	0xa9
+ 813 03ca 72       		.byte	0x72
+ 814 03cb 07       		.uleb128 0x7
+ 815 03cc C0050000 		.4byte	.LASF82
+ 816 03d0 04       		.byte	0x4
+ 817 03d1 7E       		.byte	0x7e
+ 818 03d2 A9000000 		.4byte	0xa9
+ 819 03d6 73       		.byte	0x73
+ 820 03d7 07       		.uleb128 0x7
+ 821 03d8 81020000 		.4byte	.LASF83
+ 822 03dc 04       		.byte	0x4
+ 823 03dd 80       		.byte	0x80
+ 824 03de BF000000 		.4byte	0xbf
+ 825 03e2 74       		.byte	0x74
+ 826 03e3 07       		.uleb128 0x7
+ 827 03e4 96080000 		.4byte	.LASF84
+ 828 03e8 04       		.byte	0x4
+ 829 03e9 81       		.byte	0x81
+ 830 03ea BF000000 		.4byte	0xbf
+ 831 03ee 76       		.byte	0x76
+ 832 03ef 07       		.uleb128 0x7
+ 833 03f0 E5020000 		.4byte	.LASF85
+ 834 03f4 04       		.byte	0x4
+ 835 03f5 82       		.byte	0x82
+ 836 03f6 BF000000 		.4byte	0xbf
+ 837 03fa 78       		.byte	0x78
+ 838 03fb 07       		.uleb128 0x7
+ 839 03fc D4000000 		.4byte	.LASF86
+ 840 0400 04       		.byte	0x4
+ 841 0401 83       		.byte	0x83
+ 842 0402 BF000000 		.4byte	0xbf
+ 843 0406 7A       		.byte	0x7a
+ 844 0407 07       		.uleb128 0x7
+ 845 0408 B7090000 		.4byte	.LASF87
+ 846 040c 04       		.byte	0x4
+ 847 040d 86       		.byte	0x86
+ 848 040e A9000000 		.4byte	0xa9
+ 849 0412 7C       		.byte	0x7c
+ 850 0413 07       		.uleb128 0x7
+ 851 0414 25090000 		.4byte	.LASF88
+ 852 0418 04       		.byte	0x4
+ 853 0419 87       		.byte	0x87
+ 854 041a A9000000 		.4byte	0xa9
+ 855 041e 7D       		.byte	0x7d
+ 856 041f 07       		.uleb128 0x7
+ 857 0420 5F000000 		.4byte	.LASF89
+ 858 0424 04       		.byte	0x4
+ 859 0425 88       		.byte	0x88
+ 860 0426 A9000000 		.4byte	0xa9
+ 861 042a 7E       		.byte	0x7e
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 18
+
+
+ 862 042b 07       		.uleb128 0x7
+ 863 042c 40030000 		.4byte	.LASF90
+ 864 0430 04       		.byte	0x4
+ 865 0431 89       		.byte	0x89
+ 866 0432 A9000000 		.4byte	0xa9
+ 867 0436 7F       		.byte	0x7f
+ 868 0437 07       		.uleb128 0x7
+ 869 0438 B8030000 		.4byte	.LASF91
+ 870 043c 04       		.byte	0x4
+ 871 043d 8A       		.byte	0x8a
+ 872 043e A9000000 		.4byte	0xa9
+ 873 0442 80       		.byte	0x80
+ 874 0443 07       		.uleb128 0x7
+ 875 0444 49050000 		.4byte	.LASF92
+ 876 0448 04       		.byte	0x4
+ 877 0449 8D       		.byte	0x8d
+ 878 044a D5000000 		.4byte	0xd5
+ 879 044e 84       		.byte	0x84
+ 880 044f 07       		.uleb128 0x7
+ 881 0450 E9000000 		.4byte	.LASF93
+ 882 0454 04       		.byte	0x4
+ 883 0455 8E       		.byte	0x8e
+ 884 0456 D5000000 		.4byte	0xd5
+ 885 045a 88       		.byte	0x88
+ 886 045b 07       		.uleb128 0x7
+ 887 045c A2090000 		.4byte	.LASF94
+ 888 0460 04       		.byte	0x4
+ 889 0461 8F       		.byte	0x8f
+ 890 0462 D5000000 		.4byte	0xd5
+ 891 0466 8C       		.byte	0x8c
+ 892 0467 07       		.uleb128 0x7
+ 893 0468 79050000 		.4byte	.LASF95
+ 894 046c 04       		.byte	0x4
+ 895 046d 90       		.byte	0x90
+ 896 046e D5000000 		.4byte	0xd5
+ 897 0472 90       		.byte	0x90
+ 898 0473 07       		.uleb128 0x7
+ 899 0474 99030000 		.4byte	.LASF96
+ 900 0478 04       		.byte	0x4
+ 901 0479 91       		.byte	0x91
+ 902 047a D5000000 		.4byte	0xd5
+ 903 047e 94       		.byte	0x94
+ 904 047f 07       		.uleb128 0x7
+ 905 0480 2C050000 		.4byte	.LASF97
+ 906 0484 04       		.byte	0x4
+ 907 0485 92       		.byte	0x92
+ 908 0486 D5000000 		.4byte	0xd5
+ 909 048a 98       		.byte	0x98
+ 910 048b 07       		.uleb128 0x7
+ 911 048c 370A0000 		.4byte	.LASF98
+ 912 0490 04       		.byte	0x4
+ 913 0491 93       		.byte	0x93
+ 914 0492 D5000000 		.4byte	0xd5
+ 915 0496 9C       		.byte	0x9c
+ 916 0497 07       		.uleb128 0x7
+ 917 0498 5C010000 		.4byte	.LASF99
+ 918 049c 04       		.byte	0x4
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 19
+
+
+ 919 049d 94       		.byte	0x94
+ 920 049e D5000000 		.4byte	0xd5
+ 921 04a2 A0       		.byte	0xa0
+ 922 04a3 07       		.uleb128 0x7
+ 923 04a4 32020000 		.4byte	.LASF100
+ 924 04a8 04       		.byte	0x4
+ 925 04a9 95       		.byte	0x95
+ 926 04aa BF000000 		.4byte	0xbf
+ 927 04ae A4       		.byte	0xa4
+ 928 04af 07       		.uleb128 0x7
+ 929 04b0 1F080000 		.4byte	.LASF101
+ 930 04b4 04       		.byte	0x4
+ 931 04b5 96       		.byte	0x96
+ 932 04b6 BF000000 		.4byte	0xbf
+ 933 04ba A6       		.byte	0xa6
+ 934 04bb 07       		.uleb128 0x7
+ 935 04bc 2F070000 		.4byte	.LASF102
+ 936 04c0 04       		.byte	0x4
+ 937 04c1 97       		.byte	0x97
+ 938 04c2 BF000000 		.4byte	0xbf
+ 939 04c6 A8       		.byte	0xa8
+ 940 04c7 07       		.uleb128 0x7
+ 941 04c8 62080000 		.4byte	.LASF103
+ 942 04cc 04       		.byte	0x4
+ 943 04cd 98       		.byte	0x98
+ 944 04ce BF000000 		.4byte	0xbf
+ 945 04d2 AA       		.byte	0xaa
+ 946 04d3 07       		.uleb128 0x7
+ 947 04d4 97040000 		.4byte	.LASF104
+ 948 04d8 04       		.byte	0x4
+ 949 04d9 99       		.byte	0x99
+ 950 04da BF000000 		.4byte	0xbf
+ 951 04de AC       		.byte	0xac
+ 952 04df 07       		.uleb128 0x7
+ 953 04e0 D7050000 		.4byte	.LASF105
+ 954 04e4 04       		.byte	0x4
+ 955 04e5 9A       		.byte	0x9a
+ 956 04e6 BF000000 		.4byte	0xbf
+ 957 04ea AE       		.byte	0xae
+ 958 04eb 07       		.uleb128 0x7
+ 959 04ec 02090000 		.4byte	.LASF106
+ 960 04f0 04       		.byte	0x4
+ 961 04f1 9D       		.byte	0x9d
+ 962 04f2 BF000000 		.4byte	0xbf
+ 963 04f6 B0       		.byte	0xb0
+ 964 04f7 07       		.uleb128 0x7
+ 965 04f8 72000000 		.4byte	.LASF107
+ 966 04fc 04       		.byte	0x4
+ 967 04fd 9E       		.byte	0x9e
+ 968 04fe D5000000 		.4byte	0xd5
+ 969 0502 B4       		.byte	0xb4
+ 970 0503 00       		.byte	0
+ 971 0504 03       		.uleb128 0x3
+ 972 0505 EB040000 		.4byte	.LASF108
+ 973 0509 04       		.byte	0x4
+ 974 050a 9F       		.byte	0x9f
+ 975 050b F3000000 		.4byte	0xf3
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 20
+
+
+ 976 050f 02       		.uleb128 0x2
+ 977 0510 01       		.byte	0x1
+ 978 0511 08       		.byte	0x8
+ 979 0512 4C080000 		.4byte	.LASF109
+ 980 0516 02       		.uleb128 0x2
+ 981 0517 04       		.byte	0x4
+ 982 0518 04       		.byte	0x4
+ 983 0519 0E070000 		.4byte	.LASF110
+ 984 051d 08       		.uleb128 0x8
+ 985 051e 04       		.byte	0x4
+ 986 051f 02       		.uleb128 0x2
+ 987 0520 01       		.byte	0x1
+ 988 0521 02       		.byte	0x2
+ 989 0522 8A070000 		.4byte	.LASF111
+ 990 0526 09       		.uleb128 0x9
+ 991 0527 01       		.byte	0x1
+ 992 0528 45000000 		.4byte	0x45
+ 993 052c 05       		.byte	0x5
+ 994 052d 1304     		.2byte	0x413
+ 995 052f 4C050000 		.4byte	0x54c
+ 996 0533 0A       		.uleb128 0xa
+ 997 0534 60020000 		.4byte	.LASF112
+ 998 0538 00       		.byte	0
+ 999 0539 0A       		.uleb128 0xa
+ 1000 053a 71070000 		.4byte	.LASF113
+ 1001 053e 01       		.byte	0x1
+ 1002 053f 0A       		.uleb128 0xa
+ 1003 0540 BB020000 		.4byte	.LASF114
+ 1004 0544 02       		.byte	0x2
+ 1005 0545 0A       		.uleb128 0xa
+ 1006 0546 CC090000 		.4byte	.LASF115
+ 1007 054a 03       		.byte	0x3
+ 1008 054b 00       		.byte	0
+ 1009 054c 0B       		.uleb128 0xb
+ 1010 054d F0010000 		.4byte	.LASF116
+ 1011 0551 05       		.byte	0x5
+ 1012 0552 1804     		.2byte	0x418
+ 1013 0554 26050000 		.4byte	0x526
+ 1014 0558 0C       		.uleb128 0xc
+ 1015 0559 78       		.byte	0x78
+ 1016 055a 05       		.byte	0x5
+ 1017 055b 0205     		.2byte	0x502
+ 1018 055d 25060000 		.4byte	0x625
+ 1019 0561 0D       		.uleb128 0xd
+ 1020 0562 D2080000 		.4byte	.LASF117
+ 1021 0566 05       		.byte	0x5
+ 1022 0567 0405     		.2byte	0x504
+ 1023 0569 D5000000 		.4byte	0xd5
+ 1024 056d 00       		.byte	0
+ 1025 056e 0D       		.uleb128 0xd
+ 1026 056f 80090000 		.4byte	.LASF118
+ 1027 0573 05       		.byte	0x5
+ 1028 0574 0505     		.2byte	0x505
+ 1029 0576 D5000000 		.4byte	0xd5
+ 1030 057a 04       		.byte	0x4
+ 1031 057b 0D       		.uleb128 0xd
+ 1032 057c 20030000 		.4byte	.LASF119
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 21
+
+
+ 1033 0580 05       		.byte	0x5
+ 1034 0581 0605     		.2byte	0x506
+ 1035 0583 D5000000 		.4byte	0xd5
+ 1036 0587 08       		.byte	0x8
+ 1037 0588 0D       		.uleb128 0xd
+ 1038 0589 B3050000 		.4byte	.LASF120
+ 1039 058d 05       		.byte	0x5
+ 1040 058e 0705     		.2byte	0x507
+ 1041 0590 D5000000 		.4byte	0xd5
+ 1042 0594 0C       		.byte	0xc
+ 1043 0595 0D       		.uleb128 0xd
+ 1044 0596 A5040000 		.4byte	.LASF121
+ 1045 059a 05       		.byte	0x5
+ 1046 059b 0805     		.2byte	0x508
+ 1047 059d D5000000 		.4byte	0xd5
+ 1048 05a1 10       		.byte	0x10
+ 1049 05a2 0D       		.uleb128 0xd
+ 1050 05a3 51090000 		.4byte	.LASF122
+ 1051 05a7 05       		.byte	0x5
+ 1052 05a8 0905     		.2byte	0x509
+ 1053 05aa 4C050000 		.4byte	0x54c
+ 1054 05ae 14       		.byte	0x14
+ 1055 05af 0D       		.uleb128 0xd
+ 1056 05b0 62070000 		.4byte	.LASF123
+ 1057 05b4 05       		.byte	0x5
+ 1058 05b5 0A05     		.2byte	0x50a
+ 1059 05b7 D5000000 		.4byte	0xd5
+ 1060 05bb 18       		.byte	0x18
+ 1061 05bc 0D       		.uleb128 0xd
+ 1062 05bd FB040000 		.4byte	.LASF124
+ 1063 05c1 05       		.byte	0x5
+ 1064 05c2 0B05     		.2byte	0x50b
+ 1065 05c4 25060000 		.4byte	0x625
+ 1066 05c8 1C       		.byte	0x1c
+ 1067 05c9 0D       		.uleb128 0xd
+ 1068 05ca 17030000 		.4byte	.LASF125
+ 1069 05ce 05       		.byte	0x5
+ 1070 05cf 0C05     		.2byte	0x50c
+ 1071 05d1 D5000000 		.4byte	0xd5
+ 1072 05d5 5C       		.byte	0x5c
+ 1073 05d6 0D       		.uleb128 0xd
+ 1074 05d7 C8000000 		.4byte	.LASF126
+ 1075 05db 05       		.byte	0x5
+ 1076 05dc 0D05     		.2byte	0x50d
+ 1077 05de D5000000 		.4byte	0xd5
+ 1078 05e2 60       		.byte	0x60
+ 1079 05e3 0D       		.uleb128 0xd
+ 1080 05e4 46060000 		.4byte	.LASF127
+ 1081 05e8 05       		.byte	0x5
+ 1082 05e9 0E05     		.2byte	0x50e
+ 1083 05eb D5000000 		.4byte	0xd5
+ 1084 05ef 64       		.byte	0x64
+ 1085 05f0 0D       		.uleb128 0xd
+ 1086 05f1 C4070000 		.4byte	.LASF128
+ 1087 05f5 05       		.byte	0x5
+ 1088 05f6 0F05     		.2byte	0x50f
+ 1089 05f8 D5000000 		.4byte	0xd5
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 22
+
+
+ 1090 05fc 68       		.byte	0x68
+ 1091 05fd 0D       		.uleb128 0xd
+ 1092 05fe 560A0000 		.4byte	.LASF129
+ 1093 0602 05       		.byte	0x5
+ 1094 0603 1005     		.2byte	0x510
+ 1095 0605 D5000000 		.4byte	0xd5
+ 1096 0609 6C       		.byte	0x6c
+ 1097 060a 0D       		.uleb128 0xd
+ 1098 060b E5050000 		.4byte	.LASF130
+ 1099 060f 05       		.byte	0x5
+ 1100 0610 1105     		.2byte	0x511
+ 1101 0612 1F050000 		.4byte	0x51f
+ 1102 0616 70       		.byte	0x70
+ 1103 0617 0D       		.uleb128 0xd
+ 1104 0618 34080000 		.4byte	.LASF131
+ 1105 061c 05       		.byte	0x5
+ 1106 061d 1205     		.2byte	0x512
+ 1107 061f D5000000 		.4byte	0xd5
+ 1108 0623 74       		.byte	0x74
+ 1109 0624 00       		.byte	0
+ 1110 0625 0E       		.uleb128 0xe
+ 1111 0626 D5000000 		.4byte	0xd5
+ 1112 062a 35060000 		.4byte	0x635
+ 1113 062e 0F       		.uleb128 0xf
+ 1114 062f E0000000 		.4byte	0xe0
+ 1115 0633 0F       		.byte	0xf
+ 1116 0634 00       		.byte	0
+ 1117 0635 0B       		.uleb128 0xb
+ 1118 0636 AD010000 		.4byte	.LASF132
+ 1119 063a 05       		.byte	0x5
+ 1120 063b 1305     		.2byte	0x513
+ 1121 063d 58050000 		.4byte	0x558
+ 1122 0641 10       		.uleb128 0x10
+ 1123 0642 04       		.byte	0x4
+ 1124 0643 47060000 		.4byte	0x647
+ 1125 0647 11       		.uleb128 0x11
+ 1126 0648 52060000 		.4byte	0x652
+ 1127 064c 12       		.uleb128 0x12
+ 1128 064d D5000000 		.4byte	0xd5
+ 1129 0651 00       		.byte	0
+ 1130 0652 0B       		.uleb128 0xb
+ 1131 0653 2F040000 		.4byte	.LASF133
+ 1132 0657 06       		.byte	0x6
+ 1133 0658 D901     		.2byte	0x1d9
+ 1134 065a 41060000 		.4byte	0x641
+ 1135 065e 13       		.uleb128 0x13
+ 1136 065f 960A0000 		.4byte	.LASF158
+ 1137 0663 38       		.byte	0x38
+ 1138 0664 06       		.byte	0x6
+ 1139 0665 7502     		.2byte	0x275
+ 1140 0667 22070000 		.4byte	0x722
+ 1141 066b 0D       		.uleb128 0xd
+ 1142 066c 4D0A0000 		.4byte	.LASF134
+ 1143 0670 06       		.byte	0x6
+ 1144 0671 7802     		.2byte	0x278
+ 1145 0673 E7000000 		.4byte	0xe7
+ 1146 0677 00       		.byte	0
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 23
+
+
+ 1147 0678 0D       		.uleb128 0xd
+ 1148 0679 99090000 		.4byte	.LASF135
+ 1149 067d 06       		.byte	0x6
+ 1150 067e 7902     		.2byte	0x279
+ 1151 0680 E7000000 		.4byte	0xe7
+ 1152 0684 04       		.byte	0x4
+ 1153 0685 0D       		.uleb128 0xd
+ 1154 0686 52010000 		.4byte	.LASF136
+ 1155 068a 06       		.byte	0x6
+ 1156 068b 7B02     		.2byte	0x27b
+ 1157 068d 1D050000 		.4byte	0x51d
+ 1158 0691 08       		.byte	0x8
+ 1159 0692 0D       		.uleb128 0xd
+ 1160 0693 D7080000 		.4byte	.LASF137
+ 1161 0697 06       		.byte	0x6
+ 1162 0698 7C02     		.2byte	0x27c
+ 1163 069a D5000000 		.4byte	0xd5
+ 1164 069e 0C       		.byte	0xc
+ 1165 069f 0D       		.uleb128 0xd
+ 1166 06a0 1E050000 		.4byte	.LASF138
+ 1167 06a4 06       		.byte	0x6
+ 1168 06a5 7D02     		.2byte	0x27d
+ 1169 06a7 E7000000 		.4byte	0xe7
+ 1170 06ab 10       		.byte	0x10
+ 1171 06ac 0D       		.uleb128 0xd
+ 1172 06ad E6090000 		.4byte	.LASF139
+ 1173 06b1 06       		.byte	0x6
+ 1174 06b2 7E02     		.2byte	0x27e
+ 1175 06b4 E7000000 		.4byte	0xe7
+ 1176 06b8 14       		.byte	0x14
+ 1177 06b9 0D       		.uleb128 0xd
+ 1178 06ba 3E090000 		.4byte	.LASF140
+ 1179 06be 06       		.byte	0x6
+ 1180 06bf 8002     		.2byte	0x280
+ 1181 06c1 1D050000 		.4byte	0x51d
+ 1182 06c5 18       		.byte	0x18
+ 1183 06c6 0D       		.uleb128 0xd
+ 1184 06c7 32000000 		.4byte	.LASF141
+ 1185 06cb 06       		.byte	0x6
+ 1186 06cc 8102     		.2byte	0x281
+ 1187 06ce D5000000 		.4byte	0xd5
+ 1188 06d2 1C       		.byte	0x1c
+ 1189 06d3 0D       		.uleb128 0xd
+ 1190 06d4 90030000 		.4byte	.LASF142
+ 1191 06d8 06       		.byte	0x6
+ 1192 06d9 8202     		.2byte	0x282
+ 1193 06db E7000000 		.4byte	0xe7
+ 1194 06df 20       		.byte	0x20
+ 1195 06e0 0D       		.uleb128 0xd
+ 1196 06e1 D9040000 		.4byte	.LASF143
+ 1197 06e5 06       		.byte	0x6
+ 1198 06e6 8402     		.2byte	0x284
+ 1199 06e8 1D050000 		.4byte	0x51d
+ 1200 06ec 24       		.byte	0x24
+ 1201 06ed 0D       		.uleb128 0xd
+ 1202 06ee AE030000 		.4byte	.LASF144
+ 1203 06f2 06       		.byte	0x6
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 24
+
+
+ 1204 06f3 8502     		.2byte	0x285
+ 1205 06f5 D5000000 		.4byte	0xd5
+ 1206 06f9 28       		.byte	0x28
+ 1207 06fa 0D       		.uleb128 0xd
+ 1208 06fb 51070000 		.4byte	.LASF145
+ 1209 06ff 06       		.byte	0x6
+ 1210 0700 8602     		.2byte	0x286
+ 1211 0702 E7000000 		.4byte	0xe7
+ 1212 0706 2C       		.byte	0x2c
+ 1213 0707 0D       		.uleb128 0xd
+ 1214 0708 B7040000 		.4byte	.LASF146
+ 1215 070c 06       		.byte	0x6
+ 1216 070d 8B02     		.2byte	0x28b
+ 1217 070f 52060000 		.4byte	0x652
+ 1218 0713 30       		.byte	0x30
+ 1219 0714 0D       		.uleb128 0xd
+ 1220 0715 36090000 		.4byte	.LASF147
+ 1221 0719 06       		.byte	0x6
+ 1222 071a 8E02     		.2byte	0x28e
+ 1223 071c D5000000 		.4byte	0xd5
+ 1224 0720 34       		.byte	0x34
+ 1225 0721 00       		.byte	0
+ 1226 0722 0B       		.uleb128 0xb
+ 1227 0723 12000000 		.4byte	.LASF148
+ 1228 0727 06       		.byte	0x6
+ 1229 0728 9102     		.2byte	0x291
+ 1230 072a 5E060000 		.4byte	0x65e
+ 1231 072e 06       		.uleb128 0x6
+ 1232 072f 14       		.byte	0x14
+ 1233 0730 07       		.byte	0x7
+ 1234 0731 3B       		.byte	0x3b
+ 1235 0732 73070000 		.4byte	0x773
+ 1236 0736 07       		.uleb128 0x7
+ 1237 0737 06050000 		.4byte	.LASF149
+ 1238 073b 07       		.byte	0x7
+ 1239 073c 3D       		.byte	0x3d
+ 1240 073d D5000000 		.4byte	0xd5
+ 1241 0741 00       		.byte	0
+ 1242 0742 07       		.uleb128 0x7
+ 1243 0743 DF040000 		.4byte	.LASF150
+ 1244 0747 07       		.byte	0x7
+ 1245 0748 3E       		.byte	0x3e
+ 1246 0749 D5000000 		.4byte	0xd5
+ 1247 074d 04       		.byte	0x4
+ 1248 074e 07       		.uleb128 0x7
+ 1249 074f 7A030000 		.4byte	.LASF151
+ 1250 0753 07       		.byte	0x7
+ 1251 0754 3F       		.byte	0x3f
+ 1252 0755 73070000 		.4byte	0x773
+ 1253 0759 08       		.byte	0x8
+ 1254 075a 07       		.uleb128 0x7
+ 1255 075b EE080000 		.4byte	.LASF152
+ 1256 075f 07       		.byte	0x7
+ 1257 0760 40       		.byte	0x40
+ 1258 0761 D5000000 		.4byte	0xd5
+ 1259 0765 0C       		.byte	0xc
+ 1260 0766 07       		.uleb128 0x7
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 25
+
+
+ 1261 0767 13020000 		.4byte	.LASF153
+ 1262 076b 07       		.byte	0x7
+ 1263 076c 45       		.byte	0x45
+ 1264 076d D5000000 		.4byte	0xd5
+ 1265 0771 10       		.byte	0x10
+ 1266 0772 00       		.byte	0
+ 1267 0773 10       		.uleb128 0x10
+ 1268 0774 04       		.byte	0x4
+ 1269 0775 79070000 		.4byte	0x779
+ 1270 0779 14       		.uleb128 0x14
+ 1271 077a 35060000 		.4byte	0x635
+ 1272 077e 03       		.uleb128 0x3
+ 1273 077f 05030000 		.4byte	.LASF154
+ 1274 0783 07       		.byte	0x7
+ 1275 0784 48       		.byte	0x48
+ 1276 0785 2E070000 		.4byte	0x72e
+ 1277 0789 10       		.uleb128 0x10
+ 1278 078a 04       		.byte	0x4
+ 1279 078b 9B000000 		.4byte	0x9b
+ 1280 078f 15       		.uleb128 0x15
+ 1281 0790 86080000 		.4byte	.LASF157
+ 1282 0794 01       		.byte	0x1
+ 1283 0795 45000000 		.4byte	0x45
+ 1284 0799 08       		.byte	0x8
+ 1285 079a 6F       		.byte	0x6f
+ 1286 079b AC070000 		.4byte	0x7ac
+ 1287 079f 0A       		.uleb128 0xa
+ 1288 07a0 EE030000 		.4byte	.LASF155
+ 1289 07a4 00       		.byte	0
+ 1290 07a5 0A       		.uleb128 0xa
+ 1291 07a6 780A0000 		.4byte	.LASF156
+ 1292 07aa 01       		.byte	0x1
+ 1293 07ab 00       		.byte	0
+ 1294 07ac 03       		.uleb128 0x3
+ 1295 07ad 86080000 		.4byte	.LASF157
+ 1296 07b1 08       		.byte	0x8
+ 1297 07b2 72       		.byte	0x72
+ 1298 07b3 8F070000 		.4byte	0x78f
+ 1299 07b7 16       		.uleb128 0x16
+ 1300 07b8 E5080000 		.4byte	.LASF159
+ 1301 07bc 20       		.byte	0x20
+ 1302 07bd 08       		.byte	0x8
+ 1303 07be 77       		.byte	0x77
+ 1304 07bf 24080000 		.4byte	0x824
+ 1305 07c3 07       		.uleb128 0x7
+ 1306 07c4 5D080000 		.4byte	.LASF160
+ 1307 07c8 08       		.byte	0x8
+ 1308 07c9 78       		.byte	0x78
+ 1309 07ca AC070000 		.4byte	0x7ac
+ 1310 07ce 00       		.byte	0
+ 1311 07cf 07       		.uleb128 0x7
+ 1312 07d0 42050000 		.4byte	.LASF161
+ 1313 07d4 08       		.byte	0x8
+ 1314 07d5 79       		.byte	0x79
+ 1315 07d6 9B000000 		.4byte	0x9b
+ 1316 07da 04       		.byte	0x4
+ 1317 07db 07       		.uleb128 0x7
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 26
+
+
+ 1318 07dc 07070000 		.4byte	.LASF162
+ 1319 07e0 08       		.byte	0x8
+ 1320 07e1 7A       		.byte	0x7a
+ 1321 07e2 9B000000 		.4byte	0x9b
+ 1322 07e6 08       		.byte	0x8
+ 1323 07e7 07       		.uleb128 0x7
+ 1324 07e8 E2070000 		.4byte	.LASF163
+ 1325 07ec 08       		.byte	0x8
+ 1326 07ed 7B       		.byte	0x7b
+ 1327 07ee 9B000000 		.4byte	0x9b
+ 1328 07f2 0C       		.byte	0xc
+ 1329 07f3 07       		.uleb128 0x7
+ 1330 07f4 E8070000 		.4byte	.LASF164
+ 1331 07f8 08       		.byte	0x8
+ 1332 07f9 7C       		.byte	0x7c
+ 1333 07fa 9B000000 		.4byte	0x9b
+ 1334 07fe 10       		.byte	0x10
+ 1335 07ff 07       		.uleb128 0x7
+ 1336 0800 2C000000 		.4byte	.LASF165
+ 1337 0804 08       		.byte	0x8
+ 1338 0805 7D       		.byte	0x7d
+ 1339 0806 9B000000 		.4byte	0x9b
+ 1340 080a 14       		.byte	0x14
+ 1341 080b 07       		.uleb128 0x7
+ 1342 080c 8B090000 		.4byte	.LASF166
+ 1343 0810 08       		.byte	0x8
+ 1344 0811 7E       		.byte	0x7e
+ 1345 0812 9B000000 		.4byte	0x9b
+ 1346 0816 18       		.byte	0x18
+ 1347 0817 07       		.uleb128 0x7
+ 1348 0818 B0040000 		.4byte	.LASF167
+ 1349 081c 08       		.byte	0x8
+ 1350 081d 7F       		.byte	0x7f
+ 1351 081e 9B000000 		.4byte	0x9b
+ 1352 0822 1C       		.byte	0x1c
+ 1353 0823 00       		.byte	0
+ 1354 0824 03       		.uleb128 0x3
+ 1355 0825 E5080000 		.4byte	.LASF159
+ 1356 0829 08       		.byte	0x8
+ 1357 082a 80       		.byte	0x80
+ 1358 082b B7070000 		.4byte	0x7b7
+ 1359 082f 17       		.uleb128 0x17
+ 1360 0830 1D090000 		.4byte	.LASF169
+ 1361 0834 01       		.byte	0x1
+ 1362 0835 1B       		.byte	0x1b
+ 1363 0836 9B000000 		.4byte	0x9b
+ 1364 083a 00000000 		.4byte	.LFB688
+ 1365 083e 3C000000 		.4byte	.LFE688-.LFB688
+ 1366 0842 01       		.uleb128 0x1
+ 1367 0843 9C       		.byte	0x9c
+ 1368 0844 74080000 		.4byte	0x874
+ 1369 0848 18       		.uleb128 0x18
+ 1370 0849 70737900 		.ascii	"psy\000"
+ 1371 084d 01       		.byte	0x1
+ 1372 084e 1B       		.byte	0x1b
+ 1373 084f 25000000 		.4byte	0x25
+ 1374 0853 00000000 		.4byte	.LLST0
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 27
+
+
+ 1375 0857 19       		.uleb128 0x19
+ 1376 0858 83040000 		.4byte	.LASF168
+ 1377 085c 01       		.byte	0x1
+ 1378 085d 1B       		.byte	0x1b
+ 1379 085e 9B000000 		.4byte	0x9b
+ 1380 0862 28000000 		.4byte	.LLST1
+ 1381 0866 1A       		.uleb128 0x1a
+ 1382 0867 6400     		.ascii	"d\000"
+ 1383 0869 01       		.byte	0x1
+ 1384 086a 1D       		.byte	0x1d
+ 1385 086b 25000000 		.4byte	0x25
+ 1386 086f 54000000 		.4byte	.LLST2
+ 1387 0873 00       		.byte	0
+ 1388 0874 1B       		.uleb128 0x1b
+ 1389 0875 0C080000 		.4byte	.LASF170
+ 1390 0879 01       		.byte	0x1
+ 1391 087a 3E       		.byte	0x3e
+ 1392 087b 9B000000 		.4byte	0x9b
+ 1393 087f 00000000 		.4byte	.LFB690
+ 1394 0883 04000000 		.4byte	.LFE690-.LFB690
+ 1395 0887 01       		.uleb128 0x1
+ 1396 0888 9C       		.byte	0x9c
+ 1397 0889 A8080000 		.4byte	0x8a8
+ 1398 088d 18       		.uleb128 0x18
+ 1399 088e 703100   		.ascii	"p1\000"
+ 1400 0891 01       		.byte	0x1
+ 1401 0892 3E       		.byte	0x3e
+ 1402 0893 9B000000 		.4byte	0x9b
+ 1403 0897 6C000000 		.4byte	.LLST3
+ 1404 089b 1C       		.uleb128 0x1c
+ 1405 089c 703200   		.ascii	"p2\000"
+ 1406 089f 01       		.byte	0x1
+ 1407 08a0 3E       		.byte	0x3e
+ 1408 08a1 9B000000 		.4byte	0x9b
+ 1409 08a5 01       		.uleb128 0x1
+ 1410 08a6 51       		.byte	0x51
+ 1411 08a7 00       		.byte	0
+ 1412 08a8 1B       		.uleb128 0x1b
+ 1413 08a9 44090000 		.4byte	.LASF171
+ 1414 08ad 01       		.byte	0x1
+ 1415 08ae 44       		.byte	0x44
+ 1416 08af 89070000 		.4byte	0x789
+ 1417 08b3 00000000 		.4byte	.LFB691
+ 1418 08b7 84000000 		.4byte	.LFE691-.LFB691
+ 1419 08bb 01       		.uleb128 0x1
+ 1420 08bc 9C       		.byte	0x9c
+ 1421 08bd 12090000 		.4byte	0x912
+ 1422 08c1 19       		.uleb128 0x19
+ 1423 08c2 83040000 		.4byte	.LASF168
+ 1424 08c6 01       		.byte	0x1
+ 1425 08c7 44       		.byte	0x44
+ 1426 08c8 89070000 		.4byte	0x789
+ 1427 08cc 8D000000 		.4byte	.LLST4
+ 1428 08d0 18       		.uleb128 0x18
+ 1429 08d1 70737900 		.ascii	"psy\000"
+ 1430 08d5 01       		.byte	0x1
+ 1431 08d6 44       		.byte	0x44
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 28
+
+
+ 1432 08d7 25000000 		.4byte	0x25
+ 1433 08db B9000000 		.4byte	.LLST5
+ 1434 08df 1D       		.uleb128 0x1d
+ 1435 08e0 6300     		.ascii	"c\000"
+ 1436 08e2 01       		.byte	0x1
+ 1437 08e3 47       		.byte	0x47
+ 1438 08e4 12090000 		.4byte	0x912
+ 1439 08e8 03       		.uleb128 0x3
+ 1440 08e9 91       		.byte	0x91
+ 1441 08ea E877     		.sleb128 -1048
+ 1442 08ec 1D       		.uleb128 0x1d
+ 1443 08ed 6400     		.ascii	"d\000"
+ 1444 08ef 01       		.byte	0x1
+ 1445 08f0 48       		.byte	0x48
+ 1446 08f1 12090000 		.4byte	0x912
+ 1447 08f5 05       		.uleb128 0x5
+ 1448 08f6 03       		.byte	0x3
+ 1449 08f7 00000000 		.4byte	d.21990
+ 1450 08fb 1A       		.uleb128 0x1a
+ 1451 08fc 6900     		.ascii	"i\000"
+ 1452 08fe 01       		.byte	0x1
+ 1453 08ff 49       		.byte	0x49
+ 1454 0900 9B000000 		.4byte	0x9b
+ 1455 0904 E1000000 		.4byte	.LLST6
+ 1456 0908 1E       		.uleb128 0x1e
+ 1457 0909 20000000 		.4byte	.LVL13
+ 1458 090d 2F080000 		.4byte	0x82f
+ 1459 0911 00       		.byte	0
+ 1460 0912 0E       		.uleb128 0xe
+ 1461 0913 9B000000 		.4byte	0x9b
+ 1462 0917 22090000 		.4byte	0x922
+ 1463 091b 0F       		.uleb128 0xf
+ 1464 091c E0000000 		.4byte	0xe0
+ 1465 0920 FF       		.byte	0xff
+ 1466 0921 00       		.byte	0
+ 1467 0922 1B       		.uleb128 0x1b
+ 1468 0923 0F060000 		.4byte	.LASF172
+ 1469 0927 01       		.byte	0x1
+ 1470 0928 28       		.byte	0x28
+ 1471 0929 9B000000 		.4byte	0x9b
+ 1472 092d 00000000 		.4byte	.LFB689
+ 1473 0931 8E000000 		.4byte	.LFE689-.LFB689
+ 1474 0935 01       		.uleb128 0x1
+ 1475 0936 9C       		.byte	0x9c
+ 1476 0937 E7090000 		.4byte	0x9e7
+ 1477 093b 1F       		.uleb128 0x1f
+ 1478 093c 7F080000 		.4byte	.LASF173
+ 1479 0940 01       		.byte	0x1
+ 1480 0941 28       		.byte	0x28
+ 1481 0942 24080000 		.4byte	0x824
+ 1482 0946 02       		.uleb128 0x2
+ 1483 0947 91       		.byte	0x91
+ 1484 0948 70       		.sleb128 -16
+ 1485 0949 1F       		.uleb128 0x1f
+ 1486 094a 83040000 		.4byte	.LASF168
+ 1487 094e 01       		.byte	0x1
+ 1488 094f 28       		.byte	0x28
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 29
+
+
+ 1489 0950 89070000 		.4byte	0x789
+ 1490 0954 02       		.uleb128 0x2
+ 1491 0955 91       		.byte	0x91
+ 1492 0956 10       		.sleb128 16
+ 1493 0957 1C       		.uleb128 0x1c
+ 1494 0958 70737900 		.ascii	"psy\000"
+ 1495 095c 01       		.byte	0x1
+ 1496 095d 28       		.byte	0x28
+ 1497 095e 25000000 		.4byte	0x25
+ 1498 0962 02       		.uleb128 0x2
+ 1499 0963 91       		.byte	0x91
+ 1500 0964 18       		.sleb128 24
+ 1501 0965 1A       		.uleb128 0x1a
+ 1502 0966 6400     		.ascii	"d\000"
+ 1503 0968 01       		.byte	0x1
+ 1504 0969 2A       		.byte	0x2a
+ 1505 096a 89070000 		.4byte	0x789
+ 1506 096e 00010000 		.4byte	.LLST7
+ 1507 0972 1A       		.uleb128 0x1a
+ 1508 0973 6900     		.ascii	"i\000"
+ 1509 0975 01       		.byte	0x1
+ 1510 0976 2C       		.byte	0x2c
+ 1511 0977 9B000000 		.4byte	0x9b
+ 1512 097b 1E010000 		.4byte	.LLST8
+ 1513 097f 20       		.uleb128 0x20
+ 1514 0980 A9000000 		.4byte	.LASF174
+ 1515 0984 01       		.byte	0x1
+ 1516 0985 2D       		.byte	0x2d
+ 1517 0986 9B000000 		.4byte	0x9b
+ 1518 098a 3D010000 		.4byte	.LLST9
+ 1519 098e 21       		.uleb128 0x21
+ 1520 098f 14000000 		.4byte	.LVL17
+ 1521 0993 A8080000 		.4byte	0x8a8
+ 1522 0997 B1090000 		.4byte	0x9b1
+ 1523 099b 22       		.uleb128 0x22
+ 1524 099c 01       		.uleb128 0x1
+ 1525 099d 50       		.byte	0x50
+ 1526 099e 03       		.uleb128 0x3
+ 1527 099f 91       		.byte	0x91
+ 1528 09a0 70       		.sleb128 -16
+ 1529 09a1 06       		.byte	0x6
+ 1530 09a2 22       		.uleb128 0x22
+ 1531 09a3 06       		.uleb128 0x6
+ 1532 09a4 52       		.byte	0x52
+ 1533 09a5 93       		.byte	0x93
+ 1534 09a6 04       		.uleb128 0x4
+ 1535 09a7 53       		.byte	0x53
+ 1536 09a8 93       		.byte	0x93
+ 1537 09a9 04       		.uleb128 0x4
+ 1538 09aa 05       		.uleb128 0x5
+ 1539 09ab 91       		.byte	0x91
+ 1540 09ac 78       		.sleb128 -8
+ 1541 09ad F6       		.byte	0xf6
+ 1542 09ae 08       		.byte	0x8
+ 1543 09af 25       		.uleb128 0x25
+ 1544 09b0 00       		.byte	0
+ 1545 09b1 21       		.uleb128 0x21
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 30
+
+
+ 1546 09b2 20000000 		.4byte	.LVL20
+ 1547 09b6 2F080000 		.4byte	0x82f
+ 1548 09ba D4090000 		.4byte	0x9d4
+ 1549 09be 22       		.uleb128 0x22
+ 1550 09bf 06       		.uleb128 0x6
+ 1551 09c0 50       		.byte	0x50
+ 1552 09c1 93       		.byte	0x93
+ 1553 09c2 04       		.uleb128 0x4
+ 1554 09c3 51       		.byte	0x51
+ 1555 09c4 93       		.byte	0x93
+ 1556 09c5 04       		.uleb128 0x4
+ 1557 09c6 05       		.uleb128 0x5
+ 1558 09c7 91       		.byte	0x91
+ 1559 09c8 78       		.sleb128 -8
+ 1560 09c9 F6       		.byte	0xf6
+ 1561 09ca 08       		.byte	0x8
+ 1562 09cb 25       		.uleb128 0x25
+ 1563 09cc 22       		.uleb128 0x22
+ 1564 09cd 01       		.uleb128 0x1
+ 1565 09ce 52       		.byte	0x52
+ 1566 09cf 03       		.uleb128 0x3
+ 1567 09d0 91       		.byte	0x91
+ 1568 09d1 68       		.sleb128 -24
+ 1569 09d2 06       		.byte	0x6
+ 1570 09d3 00       		.byte	0
+ 1571 09d4 1E       		.uleb128 0x1e
+ 1572 09d5 4C000000 		.4byte	.LVL23
+ 1573 09d9 74080000 		.4byte	0x874
+ 1574 09dd 1E       		.uleb128 0x1e
+ 1575 09de 72000000 		.4byte	.LVL24
+ 1576 09e2 74080000 		.4byte	0x874
+ 1577 09e6 00       		.byte	0
+ 1578 09e7 23       		.uleb128 0x23
+ 1579 09e8 72010000 		.4byte	.LASF175
+ 1580 09ec 09       		.byte	0x9
+ 1581 09ed F907     		.2byte	0x7f9
+ 1582 09ef F3090000 		.4byte	0x9f3
+ 1583 09f3 05       		.uleb128 0x5
+ 1584 09f4 CA000000 		.4byte	0xca
+ 1585 09f8 24       		.uleb128 0x24
+ 1586 09f9 25070000 		.4byte	.LASF176
+ 1587 09fd 04       		.byte	0x4
+ 1588 09fe A7       		.byte	0xa7
+ 1589 09ff 030A0000 		.4byte	0xa03
+ 1590 0a03 10       		.uleb128 0x10
+ 1591 0a04 04       		.byte	0x4
+ 1592 0a05 090A0000 		.4byte	0xa09
+ 1593 0a09 14       		.uleb128 0x14
+ 1594 0a0a 04050000 		.4byte	0x504
+ 1595 0a0e 24       		.uleb128 0x24
+ 1596 0a0f 4E040000 		.4byte	.LASF177
+ 1597 0a13 0A       		.byte	0xa
+ 1598 0a14 87       		.byte	0x87
+ 1599 0a15 22070000 		.4byte	0x722
+ 1600 0a19 23       		.uleb128 0x23
+ 1601 0a1a 19010000 		.4byte	.LASF178
+ 1602 0a1e 07       		.byte	0x7
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 31
+
+
+ 1603 0a1f 6001     		.2byte	0x160
+ 1604 0a21 D5000000 		.4byte	0xd5
+ 1605 0a25 0E       		.uleb128 0xe
+ 1606 0a26 350A0000 		.4byte	0xa35
+ 1607 0a2a 350A0000 		.4byte	0xa35
+ 1608 0a2e 0F       		.uleb128 0xf
+ 1609 0a2f E0000000 		.4byte	0xe0
+ 1610 0a33 00       		.byte	0
+ 1611 0a34 00       		.byte	0
+ 1612 0a35 14       		.uleb128 0x14
+ 1613 0a36 7E070000 		.4byte	0x77e
+ 1614 0a3a 23       		.uleb128 0x23
+ 1615 0a3b 70080000 		.4byte	.LASF179
+ 1616 0a3f 07       		.byte	0x7
+ 1617 0a40 6401     		.2byte	0x164
+ 1618 0a42 460A0000 		.4byte	0xa46
+ 1619 0a46 14       		.uleb128 0x14
+ 1620 0a47 250A0000 		.4byte	0xa25
+ 1621 0a4b 00       		.byte	0
+ 1622              		.section	.debug_abbrev,"",%progbits
+ 1623              	.Ldebug_abbrev0:
+ 1624 0000 01       		.uleb128 0x1
+ 1625 0001 11       		.uleb128 0x11
+ 1626 0002 01       		.byte	0x1
+ 1627 0003 25       		.uleb128 0x25
+ 1628 0004 0E       		.uleb128 0xe
+ 1629 0005 13       		.uleb128 0x13
+ 1630 0006 0B       		.uleb128 0xb
+ 1631 0007 03       		.uleb128 0x3
+ 1632 0008 0E       		.uleb128 0xe
+ 1633 0009 1B       		.uleb128 0x1b
+ 1634 000a 0E       		.uleb128 0xe
+ 1635 000b 55       		.uleb128 0x55
+ 1636 000c 17       		.uleb128 0x17
+ 1637 000d 11       		.uleb128 0x11
+ 1638 000e 01       		.uleb128 0x1
+ 1639 000f 10       		.uleb128 0x10
+ 1640 0010 17       		.uleb128 0x17
+ 1641 0011 00       		.byte	0
+ 1642 0012 00       		.byte	0
+ 1643 0013 02       		.uleb128 0x2
+ 1644 0014 24       		.uleb128 0x24
+ 1645 0015 00       		.byte	0
+ 1646 0016 0B       		.uleb128 0xb
+ 1647 0017 0B       		.uleb128 0xb
+ 1648 0018 3E       		.uleb128 0x3e
+ 1649 0019 0B       		.uleb128 0xb
+ 1650 001a 03       		.uleb128 0x3
+ 1651 001b 0E       		.uleb128 0xe
+ 1652 001c 00       		.byte	0
+ 1653 001d 00       		.byte	0
+ 1654 001e 03       		.uleb128 0x3
+ 1655 001f 16       		.uleb128 0x16
+ 1656 0020 00       		.byte	0
+ 1657 0021 03       		.uleb128 0x3
+ 1658 0022 0E       		.uleb128 0xe
+ 1659 0023 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 32
+
+
+ 1660 0024 0B       		.uleb128 0xb
+ 1661 0025 3B       		.uleb128 0x3b
+ 1662 0026 0B       		.uleb128 0xb
+ 1663 0027 49       		.uleb128 0x49
+ 1664 0028 13       		.uleb128 0x13
+ 1665 0029 00       		.byte	0
+ 1666 002a 00       		.byte	0
+ 1667 002b 04       		.uleb128 0x4
+ 1668 002c 24       		.uleb128 0x24
+ 1669 002d 00       		.byte	0
+ 1670 002e 0B       		.uleb128 0xb
+ 1671 002f 0B       		.uleb128 0xb
+ 1672 0030 3E       		.uleb128 0x3e
+ 1673 0031 0B       		.uleb128 0xb
+ 1674 0032 03       		.uleb128 0x3
+ 1675 0033 08       		.uleb128 0x8
+ 1676 0034 00       		.byte	0
+ 1677 0035 00       		.byte	0
+ 1678 0036 05       		.uleb128 0x5
+ 1679 0037 35       		.uleb128 0x35
+ 1680 0038 00       		.byte	0
+ 1681 0039 49       		.uleb128 0x49
+ 1682 003a 13       		.uleb128 0x13
+ 1683 003b 00       		.byte	0
+ 1684 003c 00       		.byte	0
+ 1685 003d 06       		.uleb128 0x6
+ 1686 003e 13       		.uleb128 0x13
+ 1687 003f 01       		.byte	0x1
+ 1688 0040 0B       		.uleb128 0xb
+ 1689 0041 0B       		.uleb128 0xb
+ 1690 0042 3A       		.uleb128 0x3a
+ 1691 0043 0B       		.uleb128 0xb
+ 1692 0044 3B       		.uleb128 0x3b
+ 1693 0045 0B       		.uleb128 0xb
+ 1694 0046 01       		.uleb128 0x1
+ 1695 0047 13       		.uleb128 0x13
+ 1696 0048 00       		.byte	0
+ 1697 0049 00       		.byte	0
+ 1698 004a 07       		.uleb128 0x7
+ 1699 004b 0D       		.uleb128 0xd
+ 1700 004c 00       		.byte	0
+ 1701 004d 03       		.uleb128 0x3
+ 1702 004e 0E       		.uleb128 0xe
+ 1703 004f 3A       		.uleb128 0x3a
+ 1704 0050 0B       		.uleb128 0xb
+ 1705 0051 3B       		.uleb128 0x3b
+ 1706 0052 0B       		.uleb128 0xb
+ 1707 0053 49       		.uleb128 0x49
+ 1708 0054 13       		.uleb128 0x13
+ 1709 0055 38       		.uleb128 0x38
+ 1710 0056 0B       		.uleb128 0xb
+ 1711 0057 00       		.byte	0
+ 1712 0058 00       		.byte	0
+ 1713 0059 08       		.uleb128 0x8
+ 1714 005a 0F       		.uleb128 0xf
+ 1715 005b 00       		.byte	0
+ 1716 005c 0B       		.uleb128 0xb
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 33
+
+
+ 1717 005d 0B       		.uleb128 0xb
+ 1718 005e 00       		.byte	0
+ 1719 005f 00       		.byte	0
+ 1720 0060 09       		.uleb128 0x9
+ 1721 0061 04       		.uleb128 0x4
+ 1722 0062 01       		.byte	0x1
+ 1723 0063 0B       		.uleb128 0xb
+ 1724 0064 0B       		.uleb128 0xb
+ 1725 0065 49       		.uleb128 0x49
+ 1726 0066 13       		.uleb128 0x13
+ 1727 0067 3A       		.uleb128 0x3a
+ 1728 0068 0B       		.uleb128 0xb
+ 1729 0069 3B       		.uleb128 0x3b
+ 1730 006a 05       		.uleb128 0x5
+ 1731 006b 01       		.uleb128 0x1
+ 1732 006c 13       		.uleb128 0x13
+ 1733 006d 00       		.byte	0
+ 1734 006e 00       		.byte	0
+ 1735 006f 0A       		.uleb128 0xa
+ 1736 0070 28       		.uleb128 0x28
+ 1737 0071 00       		.byte	0
+ 1738 0072 03       		.uleb128 0x3
+ 1739 0073 0E       		.uleb128 0xe
+ 1740 0074 1C       		.uleb128 0x1c
+ 1741 0075 0B       		.uleb128 0xb
+ 1742 0076 00       		.byte	0
+ 1743 0077 00       		.byte	0
+ 1744 0078 0B       		.uleb128 0xb
+ 1745 0079 16       		.uleb128 0x16
+ 1746 007a 00       		.byte	0
+ 1747 007b 03       		.uleb128 0x3
+ 1748 007c 0E       		.uleb128 0xe
+ 1749 007d 3A       		.uleb128 0x3a
+ 1750 007e 0B       		.uleb128 0xb
+ 1751 007f 3B       		.uleb128 0x3b
+ 1752 0080 05       		.uleb128 0x5
+ 1753 0081 49       		.uleb128 0x49
+ 1754 0082 13       		.uleb128 0x13
+ 1755 0083 00       		.byte	0
+ 1756 0084 00       		.byte	0
+ 1757 0085 0C       		.uleb128 0xc
+ 1758 0086 13       		.uleb128 0x13
+ 1759 0087 01       		.byte	0x1
+ 1760 0088 0B       		.uleb128 0xb
+ 1761 0089 0B       		.uleb128 0xb
+ 1762 008a 3A       		.uleb128 0x3a
+ 1763 008b 0B       		.uleb128 0xb
+ 1764 008c 3B       		.uleb128 0x3b
+ 1765 008d 05       		.uleb128 0x5
+ 1766 008e 01       		.uleb128 0x1
+ 1767 008f 13       		.uleb128 0x13
+ 1768 0090 00       		.byte	0
+ 1769 0091 00       		.byte	0
+ 1770 0092 0D       		.uleb128 0xd
+ 1771 0093 0D       		.uleb128 0xd
+ 1772 0094 00       		.byte	0
+ 1773 0095 03       		.uleb128 0x3
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 34
+
+
+ 1774 0096 0E       		.uleb128 0xe
+ 1775 0097 3A       		.uleb128 0x3a
+ 1776 0098 0B       		.uleb128 0xb
+ 1777 0099 3B       		.uleb128 0x3b
+ 1778 009a 05       		.uleb128 0x5
+ 1779 009b 49       		.uleb128 0x49
+ 1780 009c 13       		.uleb128 0x13
+ 1781 009d 38       		.uleb128 0x38
+ 1782 009e 0B       		.uleb128 0xb
+ 1783 009f 00       		.byte	0
+ 1784 00a0 00       		.byte	0
+ 1785 00a1 0E       		.uleb128 0xe
+ 1786 00a2 01       		.uleb128 0x1
+ 1787 00a3 01       		.byte	0x1
+ 1788 00a4 49       		.uleb128 0x49
+ 1789 00a5 13       		.uleb128 0x13
+ 1790 00a6 01       		.uleb128 0x1
+ 1791 00a7 13       		.uleb128 0x13
+ 1792 00a8 00       		.byte	0
+ 1793 00a9 00       		.byte	0
+ 1794 00aa 0F       		.uleb128 0xf
+ 1795 00ab 21       		.uleb128 0x21
+ 1796 00ac 00       		.byte	0
+ 1797 00ad 49       		.uleb128 0x49
+ 1798 00ae 13       		.uleb128 0x13
+ 1799 00af 2F       		.uleb128 0x2f
+ 1800 00b0 0B       		.uleb128 0xb
+ 1801 00b1 00       		.byte	0
+ 1802 00b2 00       		.byte	0
+ 1803 00b3 10       		.uleb128 0x10
+ 1804 00b4 0F       		.uleb128 0xf
+ 1805 00b5 00       		.byte	0
+ 1806 00b6 0B       		.uleb128 0xb
+ 1807 00b7 0B       		.uleb128 0xb
+ 1808 00b8 49       		.uleb128 0x49
+ 1809 00b9 13       		.uleb128 0x13
+ 1810 00ba 00       		.byte	0
+ 1811 00bb 00       		.byte	0
+ 1812 00bc 11       		.uleb128 0x11
+ 1813 00bd 15       		.uleb128 0x15
+ 1814 00be 01       		.byte	0x1
+ 1815 00bf 27       		.uleb128 0x27
+ 1816 00c0 19       		.uleb128 0x19
+ 1817 00c1 01       		.uleb128 0x1
+ 1818 00c2 13       		.uleb128 0x13
+ 1819 00c3 00       		.byte	0
+ 1820 00c4 00       		.byte	0
+ 1821 00c5 12       		.uleb128 0x12
+ 1822 00c6 05       		.uleb128 0x5
+ 1823 00c7 00       		.byte	0
+ 1824 00c8 49       		.uleb128 0x49
+ 1825 00c9 13       		.uleb128 0x13
+ 1826 00ca 00       		.byte	0
+ 1827 00cb 00       		.byte	0
+ 1828 00cc 13       		.uleb128 0x13
+ 1829 00cd 13       		.uleb128 0x13
+ 1830 00ce 01       		.byte	0x1
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 35
+
+
+ 1831 00cf 03       		.uleb128 0x3
+ 1832 00d0 0E       		.uleb128 0xe
+ 1833 00d1 0B       		.uleb128 0xb
+ 1834 00d2 0B       		.uleb128 0xb
+ 1835 00d3 3A       		.uleb128 0x3a
+ 1836 00d4 0B       		.uleb128 0xb
+ 1837 00d5 3B       		.uleb128 0x3b
+ 1838 00d6 05       		.uleb128 0x5
+ 1839 00d7 01       		.uleb128 0x1
+ 1840 00d8 13       		.uleb128 0x13
+ 1841 00d9 00       		.byte	0
+ 1842 00da 00       		.byte	0
+ 1843 00db 14       		.uleb128 0x14
+ 1844 00dc 26       		.uleb128 0x26
+ 1845 00dd 00       		.byte	0
+ 1846 00de 49       		.uleb128 0x49
+ 1847 00df 13       		.uleb128 0x13
+ 1848 00e0 00       		.byte	0
+ 1849 00e1 00       		.byte	0
+ 1850 00e2 15       		.uleb128 0x15
+ 1851 00e3 04       		.uleb128 0x4
+ 1852 00e4 01       		.byte	0x1
+ 1853 00e5 03       		.uleb128 0x3
+ 1854 00e6 0E       		.uleb128 0xe
+ 1855 00e7 0B       		.uleb128 0xb
+ 1856 00e8 0B       		.uleb128 0xb
+ 1857 00e9 49       		.uleb128 0x49
+ 1858 00ea 13       		.uleb128 0x13
+ 1859 00eb 3A       		.uleb128 0x3a
+ 1860 00ec 0B       		.uleb128 0xb
+ 1861 00ed 3B       		.uleb128 0x3b
+ 1862 00ee 0B       		.uleb128 0xb
+ 1863 00ef 01       		.uleb128 0x1
+ 1864 00f0 13       		.uleb128 0x13
+ 1865 00f1 00       		.byte	0
+ 1866 00f2 00       		.byte	0
+ 1867 00f3 16       		.uleb128 0x16
+ 1868 00f4 13       		.uleb128 0x13
+ 1869 00f5 01       		.byte	0x1
+ 1870 00f6 03       		.uleb128 0x3
+ 1871 00f7 0E       		.uleb128 0xe
+ 1872 00f8 0B       		.uleb128 0xb
+ 1873 00f9 0B       		.uleb128 0xb
+ 1874 00fa 3A       		.uleb128 0x3a
+ 1875 00fb 0B       		.uleb128 0xb
+ 1876 00fc 3B       		.uleb128 0x3b
+ 1877 00fd 0B       		.uleb128 0xb
+ 1878 00fe 01       		.uleb128 0x1
+ 1879 00ff 13       		.uleb128 0x13
+ 1880 0100 00       		.byte	0
+ 1881 0101 00       		.byte	0
+ 1882 0102 17       		.uleb128 0x17
+ 1883 0103 2E       		.uleb128 0x2e
+ 1884 0104 01       		.byte	0x1
+ 1885 0105 3F       		.uleb128 0x3f
+ 1886 0106 19       		.uleb128 0x19
+ 1887 0107 03       		.uleb128 0x3
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 36
+
+
+ 1888 0108 0E       		.uleb128 0xe
+ 1889 0109 3A       		.uleb128 0x3a
+ 1890 010a 0B       		.uleb128 0xb
+ 1891 010b 3B       		.uleb128 0x3b
+ 1892 010c 0B       		.uleb128 0xb
+ 1893 010d 27       		.uleb128 0x27
+ 1894 010e 19       		.uleb128 0x19
+ 1895 010f 49       		.uleb128 0x49
+ 1896 0110 13       		.uleb128 0x13
+ 1897 0111 11       		.uleb128 0x11
+ 1898 0112 01       		.uleb128 0x1
+ 1899 0113 12       		.uleb128 0x12
+ 1900 0114 06       		.uleb128 0x6
+ 1901 0115 40       		.uleb128 0x40
+ 1902 0116 18       		.uleb128 0x18
+ 1903 0117 9642     		.uleb128 0x2116
+ 1904 0119 19       		.uleb128 0x19
+ 1905 011a 01       		.uleb128 0x1
+ 1906 011b 13       		.uleb128 0x13
+ 1907 011c 00       		.byte	0
+ 1908 011d 00       		.byte	0
+ 1909 011e 18       		.uleb128 0x18
+ 1910 011f 05       		.uleb128 0x5
+ 1911 0120 00       		.byte	0
+ 1912 0121 03       		.uleb128 0x3
+ 1913 0122 08       		.uleb128 0x8
+ 1914 0123 3A       		.uleb128 0x3a
+ 1915 0124 0B       		.uleb128 0xb
+ 1916 0125 3B       		.uleb128 0x3b
+ 1917 0126 0B       		.uleb128 0xb
+ 1918 0127 49       		.uleb128 0x49
+ 1919 0128 13       		.uleb128 0x13
+ 1920 0129 02       		.uleb128 0x2
+ 1921 012a 17       		.uleb128 0x17
+ 1922 012b 00       		.byte	0
+ 1923 012c 00       		.byte	0
+ 1924 012d 19       		.uleb128 0x19
+ 1925 012e 05       		.uleb128 0x5
+ 1926 012f 00       		.byte	0
+ 1927 0130 03       		.uleb128 0x3
+ 1928 0131 0E       		.uleb128 0xe
+ 1929 0132 3A       		.uleb128 0x3a
+ 1930 0133 0B       		.uleb128 0xb
+ 1931 0134 3B       		.uleb128 0x3b
+ 1932 0135 0B       		.uleb128 0xb
+ 1933 0136 49       		.uleb128 0x49
+ 1934 0137 13       		.uleb128 0x13
+ 1935 0138 02       		.uleb128 0x2
+ 1936 0139 17       		.uleb128 0x17
+ 1937 013a 00       		.byte	0
+ 1938 013b 00       		.byte	0
+ 1939 013c 1A       		.uleb128 0x1a
+ 1940 013d 34       		.uleb128 0x34
+ 1941 013e 00       		.byte	0
+ 1942 013f 03       		.uleb128 0x3
+ 1943 0140 08       		.uleb128 0x8
+ 1944 0141 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 37
+
+
+ 1945 0142 0B       		.uleb128 0xb
+ 1946 0143 3B       		.uleb128 0x3b
+ 1947 0144 0B       		.uleb128 0xb
+ 1948 0145 49       		.uleb128 0x49
+ 1949 0146 13       		.uleb128 0x13
+ 1950 0147 02       		.uleb128 0x2
+ 1951 0148 17       		.uleb128 0x17
+ 1952 0149 00       		.byte	0
+ 1953 014a 00       		.byte	0
+ 1954 014b 1B       		.uleb128 0x1b
+ 1955 014c 2E       		.uleb128 0x2e
+ 1956 014d 01       		.byte	0x1
+ 1957 014e 3F       		.uleb128 0x3f
+ 1958 014f 19       		.uleb128 0x19
+ 1959 0150 03       		.uleb128 0x3
+ 1960 0151 0E       		.uleb128 0xe
+ 1961 0152 3A       		.uleb128 0x3a
+ 1962 0153 0B       		.uleb128 0xb
+ 1963 0154 3B       		.uleb128 0x3b
+ 1964 0155 0B       		.uleb128 0xb
+ 1965 0156 27       		.uleb128 0x27
+ 1966 0157 19       		.uleb128 0x19
+ 1967 0158 49       		.uleb128 0x49
+ 1968 0159 13       		.uleb128 0x13
+ 1969 015a 11       		.uleb128 0x11
+ 1970 015b 01       		.uleb128 0x1
+ 1971 015c 12       		.uleb128 0x12
+ 1972 015d 06       		.uleb128 0x6
+ 1973 015e 40       		.uleb128 0x40
+ 1974 015f 18       		.uleb128 0x18
+ 1975 0160 9742     		.uleb128 0x2117
+ 1976 0162 19       		.uleb128 0x19
+ 1977 0163 01       		.uleb128 0x1
+ 1978 0164 13       		.uleb128 0x13
+ 1979 0165 00       		.byte	0
+ 1980 0166 00       		.byte	0
+ 1981 0167 1C       		.uleb128 0x1c
+ 1982 0168 05       		.uleb128 0x5
+ 1983 0169 00       		.byte	0
+ 1984 016a 03       		.uleb128 0x3
+ 1985 016b 08       		.uleb128 0x8
+ 1986 016c 3A       		.uleb128 0x3a
+ 1987 016d 0B       		.uleb128 0xb
+ 1988 016e 3B       		.uleb128 0x3b
+ 1989 016f 0B       		.uleb128 0xb
+ 1990 0170 49       		.uleb128 0x49
+ 1991 0171 13       		.uleb128 0x13
+ 1992 0172 02       		.uleb128 0x2
+ 1993 0173 18       		.uleb128 0x18
+ 1994 0174 00       		.byte	0
+ 1995 0175 00       		.byte	0
+ 1996 0176 1D       		.uleb128 0x1d
+ 1997 0177 34       		.uleb128 0x34
+ 1998 0178 00       		.byte	0
+ 1999 0179 03       		.uleb128 0x3
+ 2000 017a 08       		.uleb128 0x8
+ 2001 017b 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 38
+
+
+ 2002 017c 0B       		.uleb128 0xb
+ 2003 017d 3B       		.uleb128 0x3b
+ 2004 017e 0B       		.uleb128 0xb
+ 2005 017f 49       		.uleb128 0x49
+ 2006 0180 13       		.uleb128 0x13
+ 2007 0181 02       		.uleb128 0x2
+ 2008 0182 18       		.uleb128 0x18
+ 2009 0183 00       		.byte	0
+ 2010 0184 00       		.byte	0
+ 2011 0185 1E       		.uleb128 0x1e
+ 2012 0186 898201   		.uleb128 0x4109
+ 2013 0189 00       		.byte	0
+ 2014 018a 11       		.uleb128 0x11
+ 2015 018b 01       		.uleb128 0x1
+ 2016 018c 31       		.uleb128 0x31
+ 2017 018d 13       		.uleb128 0x13
+ 2018 018e 00       		.byte	0
+ 2019 018f 00       		.byte	0
+ 2020 0190 1F       		.uleb128 0x1f
+ 2021 0191 05       		.uleb128 0x5
+ 2022 0192 00       		.byte	0
+ 2023 0193 03       		.uleb128 0x3
+ 2024 0194 0E       		.uleb128 0xe
+ 2025 0195 3A       		.uleb128 0x3a
+ 2026 0196 0B       		.uleb128 0xb
+ 2027 0197 3B       		.uleb128 0x3b
+ 2028 0198 0B       		.uleb128 0xb
+ 2029 0199 49       		.uleb128 0x49
+ 2030 019a 13       		.uleb128 0x13
+ 2031 019b 02       		.uleb128 0x2
+ 2032 019c 18       		.uleb128 0x18
+ 2033 019d 00       		.byte	0
+ 2034 019e 00       		.byte	0
+ 2035 019f 20       		.uleb128 0x20
+ 2036 01a0 34       		.uleb128 0x34
+ 2037 01a1 00       		.byte	0
+ 2038 01a2 03       		.uleb128 0x3
+ 2039 01a3 0E       		.uleb128 0xe
+ 2040 01a4 3A       		.uleb128 0x3a
+ 2041 01a5 0B       		.uleb128 0xb
+ 2042 01a6 3B       		.uleb128 0x3b
+ 2043 01a7 0B       		.uleb128 0xb
+ 2044 01a8 49       		.uleb128 0x49
+ 2045 01a9 13       		.uleb128 0x13
+ 2046 01aa 02       		.uleb128 0x2
+ 2047 01ab 17       		.uleb128 0x17
+ 2048 01ac 00       		.byte	0
+ 2049 01ad 00       		.byte	0
+ 2050 01ae 21       		.uleb128 0x21
+ 2051 01af 898201   		.uleb128 0x4109
+ 2052 01b2 01       		.byte	0x1
+ 2053 01b3 11       		.uleb128 0x11
+ 2054 01b4 01       		.uleb128 0x1
+ 2055 01b5 31       		.uleb128 0x31
+ 2056 01b6 13       		.uleb128 0x13
+ 2057 01b7 01       		.uleb128 0x1
+ 2058 01b8 13       		.uleb128 0x13
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 39
+
+
+ 2059 01b9 00       		.byte	0
+ 2060 01ba 00       		.byte	0
+ 2061 01bb 22       		.uleb128 0x22
+ 2062 01bc 8A8201   		.uleb128 0x410a
+ 2063 01bf 00       		.byte	0
+ 2064 01c0 02       		.uleb128 0x2
+ 2065 01c1 18       		.uleb128 0x18
+ 2066 01c2 9142     		.uleb128 0x2111
+ 2067 01c4 18       		.uleb128 0x18
+ 2068 01c5 00       		.byte	0
+ 2069 01c6 00       		.byte	0
+ 2070 01c7 23       		.uleb128 0x23
+ 2071 01c8 34       		.uleb128 0x34
+ 2072 01c9 00       		.byte	0
+ 2073 01ca 03       		.uleb128 0x3
+ 2074 01cb 0E       		.uleb128 0xe
+ 2075 01cc 3A       		.uleb128 0x3a
+ 2076 01cd 0B       		.uleb128 0xb
+ 2077 01ce 3B       		.uleb128 0x3b
+ 2078 01cf 05       		.uleb128 0x5
+ 2079 01d0 49       		.uleb128 0x49
+ 2080 01d1 13       		.uleb128 0x13
+ 2081 01d2 3F       		.uleb128 0x3f
+ 2082 01d3 19       		.uleb128 0x19
+ 2083 01d4 3C       		.uleb128 0x3c
+ 2084 01d5 19       		.uleb128 0x19
+ 2085 01d6 00       		.byte	0
+ 2086 01d7 00       		.byte	0
+ 2087 01d8 24       		.uleb128 0x24
+ 2088 01d9 34       		.uleb128 0x34
+ 2089 01da 00       		.byte	0
+ 2090 01db 03       		.uleb128 0x3
+ 2091 01dc 0E       		.uleb128 0xe
+ 2092 01dd 3A       		.uleb128 0x3a
+ 2093 01de 0B       		.uleb128 0xb
+ 2094 01df 3B       		.uleb128 0x3b
+ 2095 01e0 0B       		.uleb128 0xb
+ 2096 01e1 49       		.uleb128 0x49
+ 2097 01e2 13       		.uleb128 0x13
+ 2098 01e3 3F       		.uleb128 0x3f
+ 2099 01e4 19       		.uleb128 0x19
+ 2100 01e5 3C       		.uleb128 0x3c
+ 2101 01e6 19       		.uleb128 0x19
+ 2102 01e7 00       		.byte	0
+ 2103 01e8 00       		.byte	0
+ 2104 01e9 00       		.byte	0
+ 2105              		.section	.debug_loc,"",%progbits
+ 2106              	.Ldebug_loc0:
+ 2107              	.LLST0:
+ 2108 0000 00000000 		.4byte	.LVL0
+ 2109 0004 0D000000 		.4byte	.LVL2-1
+ 2110 0008 0600     		.2byte	0x6
+ 2111 000a 50       		.byte	0x50
+ 2112 000b 93       		.byte	0x93
+ 2113 000c 04       		.uleb128 0x4
+ 2114 000d 51       		.byte	0x51
+ 2115 000e 93       		.byte	0x93
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 40
+
+
+ 2116 000f 04       		.uleb128 0x4
+ 2117 0010 0D000000 		.4byte	.LVL2-1
+ 2118 0014 3C000000 		.4byte	.LFE688
+ 2119 0018 0600     		.2byte	0x6
+ 2120 001a F3       		.byte	0xf3
+ 2121 001b 03       		.uleb128 0x3
+ 2122 001c F5       		.byte	0xf5
+ 2123 001d 00       		.uleb128 0
+ 2124 001e 25       		.uleb128 0x25
+ 2125 001f 9F       		.byte	0x9f
+ 2126 0020 00000000 		.4byte	0
+ 2127 0024 00000000 		.4byte	0
+ 2128              	.LLST1:
+ 2129 0028 00000000 		.4byte	.LVL0
+ 2130 002c 0A000000 		.4byte	.LVL1
+ 2131 0030 0100     		.2byte	0x1
+ 2132 0032 52       		.byte	0x52
+ 2133 0033 0A000000 		.4byte	.LVL1
+ 2134 0037 2E000000 		.4byte	.LVL7
+ 2135 003b 0100     		.2byte	0x1
+ 2136 003d 56       		.byte	0x56
+ 2137 003e 2E000000 		.4byte	.LVL7
+ 2138 0042 3C000000 		.4byte	.LFE688
+ 2139 0046 0400     		.2byte	0x4
+ 2140 0048 F3       		.byte	0xf3
+ 2141 0049 01       		.uleb128 0x1
+ 2142 004a 52       		.byte	0x52
+ 2143 004b 9F       		.byte	0x9f
+ 2144 004c 00000000 		.4byte	0
+ 2145 0050 00000000 		.4byte	0
+ 2146              	.LLST2:
+ 2147 0054 28000000 		.4byte	.LVL5
+ 2148 0058 2B000000 		.4byte	.LVL6-1
+ 2149 005c 0600     		.2byte	0x6
+ 2150 005e 50       		.byte	0x50
+ 2151 005f 93       		.byte	0x93
+ 2152 0060 04       		.uleb128 0x4
+ 2153 0061 51       		.byte	0x51
+ 2154 0062 93       		.byte	0x93
+ 2155 0063 04       		.uleb128 0x4
+ 2156 0064 00000000 		.4byte	0
+ 2157 0068 00000000 		.4byte	0
+ 2158              	.LLST3:
+ 2159 006c 00000000 		.4byte	.LVL8
+ 2160 0070 02000000 		.4byte	.LVL9
+ 2161 0074 0100     		.2byte	0x1
+ 2162 0076 50       		.byte	0x50
+ 2163 0077 02000000 		.4byte	.LVL9
+ 2164 007b 04000000 		.4byte	.LFE690
+ 2165 007f 0400     		.2byte	0x4
+ 2166 0081 F3       		.byte	0xf3
+ 2167 0082 01       		.uleb128 0x1
+ 2168 0083 50       		.byte	0x50
+ 2169 0084 9F       		.byte	0x9f
+ 2170 0085 00000000 		.4byte	0
+ 2171 0089 00000000 		.4byte	0
+ 2172              	.LLST4:
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 41
+
+
+ 2173 008d 00000000 		.4byte	.LVL10
+ 2174 0091 10000000 		.4byte	.LVL12
+ 2175 0095 0100     		.2byte	0x1
+ 2176 0097 50       		.byte	0x50
+ 2177 0098 10000000 		.4byte	.LVL12
+ 2178 009c 7C000000 		.4byte	.LVL15
+ 2179 00a0 0100     		.2byte	0x1
+ 2180 00a2 55       		.byte	0x55
+ 2181 00a3 7C000000 		.4byte	.LVL15
+ 2182 00a7 84000000 		.4byte	.LFE691
+ 2183 00ab 0400     		.2byte	0x4
+ 2184 00ad F3       		.byte	0xf3
+ 2185 00ae 01       		.uleb128 0x1
+ 2186 00af 50       		.byte	0x50
+ 2187 00b0 9F       		.byte	0x9f
+ 2188 00b1 00000000 		.4byte	0
+ 2189 00b5 00000000 		.4byte	0
+ 2190              	.LLST5:
+ 2191 00b9 00000000 		.4byte	.LVL10
+ 2192 00bd 10000000 		.4byte	.LVL12
+ 2193 00c1 0600     		.2byte	0x6
+ 2194 00c3 52       		.byte	0x52
+ 2195 00c4 93       		.byte	0x93
+ 2196 00c5 04       		.uleb128 0x4
+ 2197 00c6 53       		.byte	0x53
+ 2198 00c7 93       		.byte	0x93
+ 2199 00c8 04       		.uleb128 0x4
+ 2200 00c9 10000000 		.4byte	.LVL12
+ 2201 00cd 84000000 		.4byte	.LFE691
+ 2202 00d1 0600     		.2byte	0x6
+ 2203 00d3 F3       		.byte	0xf3
+ 2204 00d4 03       		.uleb128 0x3
+ 2205 00d5 F5       		.byte	0xf5
+ 2206 00d6 02       		.uleb128 0x2
+ 2207 00d7 25       		.uleb128 0x25
+ 2208 00d8 9F       		.byte	0x9f
+ 2209 00d9 00000000 		.4byte	0
+ 2210 00dd 00000000 		.4byte	0
+ 2211              	.LLST6:
+ 2212 00e1 0C000000 		.4byte	.LVL11
+ 2213 00e5 10000000 		.4byte	.LVL12
+ 2214 00e9 0200     		.2byte	0x2
+ 2215 00eb 30       		.byte	0x30
+ 2216 00ec 9F       		.byte	0x9f
+ 2217 00ed 10000000 		.4byte	.LVL12
+ 2218 00f1 7C000000 		.4byte	.LVL15
+ 2219 00f5 0100     		.2byte	0x1
+ 2220 00f7 54       		.byte	0x54
+ 2221 00f8 00000000 		.4byte	0
+ 2222 00fc 00000000 		.4byte	0
+ 2223              	.LLST7:
+ 2224 0100 16000000 		.4byte	.LVL18
+ 2225 0104 1C000000 		.4byte	.LVL19
+ 2226 0108 0100     		.2byte	0x1
+ 2227 010a 50       		.byte	0x50
+ 2228 010b 1C000000 		.4byte	.LVL19
+ 2229 010f 8A000000 		.4byte	.LVL26
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 42
+
+
+ 2230 0113 0100     		.2byte	0x1
+ 2231 0115 56       		.byte	0x56
+ 2232 0116 00000000 		.4byte	0
+ 2233 011a 00000000 		.4byte	0
+ 2234              	.LLST8:
+ 2235 011e 16000000 		.4byte	.LVL18
+ 2236 0122 26000000 		.4byte	.LVL22
+ 2237 0126 0200     		.2byte	0x2
+ 2238 0128 30       		.byte	0x30
+ 2239 0129 9F       		.byte	0x9f
+ 2240 012a 26000000 		.4byte	.LVL22
+ 2241 012e 8A000000 		.4byte	.LVL26
+ 2242 0132 0100     		.2byte	0x1
+ 2243 0134 54       		.byte	0x54
+ 2244 0135 00000000 		.4byte	0
+ 2245 0139 00000000 		.4byte	0
+ 2246              	.LLST9:
+ 2247 013d 22000000 		.4byte	.LVL21
+ 2248 0141 26000000 		.4byte	.LVL22
+ 2249 0145 0100     		.2byte	0x1
+ 2250 0147 50       		.byte	0x50
+ 2251 0148 26000000 		.4byte	.LVL22
+ 2252 014c 8A000000 		.4byte	.LVL26
+ 2253 0150 0100     		.2byte	0x1
+ 2254 0152 55       		.byte	0x55
+ 2255 0153 00000000 		.4byte	0
+ 2256 0157 00000000 		.4byte	0
+ 2257              		.section	.debug_aranges,"",%progbits
+ 2258 0000 34000000 		.4byte	0x34
+ 2259 0004 0200     		.2byte	0x2
+ 2260 0006 00000000 		.4byte	.Ldebug_info0
+ 2261 000a 04       		.byte	0x4
+ 2262 000b 00       		.byte	0
+ 2263 000c 0000     		.2byte	0
+ 2264 000e 0000     		.2byte	0
+ 2265 0010 00000000 		.4byte	.LFB688
+ 2266 0014 3C000000 		.4byte	.LFE688-.LFB688
+ 2267 0018 00000000 		.4byte	.LFB690
+ 2268 001c 04000000 		.4byte	.LFE690-.LFB690
+ 2269 0020 00000000 		.4byte	.LFB691
+ 2270 0024 84000000 		.4byte	.LFE691-.LFB691
+ 2271 0028 00000000 		.4byte	.LFB689
+ 2272 002c 8E000000 		.4byte	.LFE689-.LFB689
+ 2273 0030 00000000 		.4byte	0
+ 2274 0034 00000000 		.4byte	0
+ 2275              		.section	.debug_ranges,"",%progbits
+ 2276              	.Ldebug_ranges0:
+ 2277 0000 00000000 		.4byte	.LFB688
+ 2278 0004 3C000000 		.4byte	.LFE688
+ 2279 0008 00000000 		.4byte	.LFB690
+ 2280 000c 04000000 		.4byte	.LFE690
+ 2281 0010 00000000 		.4byte	.LFB691
+ 2282 0014 84000000 		.4byte	.LFE691
+ 2283 0018 00000000 		.4byte	.LFB689
+ 2284 001c 8E000000 		.4byte	.LFE689
+ 2285 0020 00000000 		.4byte	0
+ 2286 0024 00000000 		.4byte	0
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 43
+
+
+ 2287              		.section	.debug_line,"",%progbits
+ 2288              	.Ldebug_line0:
+ 2289 0000 EB020000 		.section	.debug_str,"MS",%progbits,1
+ 2289      02005902 
+ 2289      00000201 
+ 2289      FB0E0D00 
+ 2289      01010101 
+ 2290              	.LASF57:
+ 2291 0000 70726F74 		.ascii	"protBusMasterMask\000"
+ 2291      4275734D 
+ 2291      61737465 
+ 2291      724D6173 
+ 2291      6B00
+ 2292              	.LASF148:
+ 2293 0012 63795F73 		.ascii	"cy_stc_scb_uart_context_t\000"
+ 2293      74635F73 
+ 2293      63625F75 
+ 2293      6172745F 
+ 2293      636F6E74 
+ 2294              	.LASF165:
+ 2295 002c 736C6F70 		.ascii	"slope\000"
+ 2295      6500
+ 2296              	.LASF141:
+ 2297 0032 72784275 		.ascii	"rxBufSize\000"
+ 2297      6653697A 
+ 2297      6500
+ 2298              	.LASF181:
+ 2299 003c 43616C63 		.ascii	"Calculations.c\000"
+ 2299      756C6174 
+ 2299      696F6E73 
+ 2299      2E6300
+ 2300              	.LASF67:
+ 2301 004b 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
+ 2301      6843746C 
+ 2301      4D61696E 
+ 2301      57733346 
+ 2301      72657100 
+ 2302              	.LASF89:
+ 2303 005f 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
+ 2303      50727443 
+ 2303      6667496E 
+ 2303      4F666673 
+ 2303      657400
+ 2304              	.LASF107:
+ 2305 0072 6970634C 		.ascii	"ipcLockStatusOffset\000"
+ 2305      6F636B53 
+ 2305      74617475 
+ 2305      734F6666 
+ 2305      73657400 
+ 2306              	.LASF33:
+ 2307 0086 63727970 		.ascii	"cryptoVersion\000"
+ 2307      746F5665 
+ 2307      7273696F 
+ 2307      6E00
+ 2308              	.LASF51:
+ 2309 0094 70657269 		.ascii	"periClockNr\000"
+ 2309      436C6F63 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 44
+
+
+ 2309      6B4E7200 
+ 2310              	.LASF29:
+ 2311 00a0 70617373 		.ascii	"passBase\000"
+ 2311      42617365 
+ 2311      00
+ 2312              	.LASF174:
+ 2313 00a9 746C6576 		.ascii	"tlevel\000"
+ 2313      656C00
+ 2314              	.LASF42:
+ 2315 00b0 63707573 		.ascii	"cpussIpcIrqNr\000"
+ 2315      73497063 
+ 2315      4972714E 
+ 2315      7200
+ 2316              	.LASF4:
+ 2317 00be 5F5F7569 		.ascii	"__uint8_t\000"
+ 2317      6E74385F 
+ 2317      7400
+ 2318              	.LASF126:
+ 2319 00c8 73617449 		.ascii	"satIntrMask\000"
+ 2319      6E74724D 
+ 2319      61736B00 
+ 2320              	.LASF86:
+ 2321 00d4 70657269 		.ascii	"periDiv24_5CtlOffset\000"
+ 2321      44697632 
+ 2321      345F3543 
+ 2321      746C4F66 
+ 2321      66736574 
+ 2322              	.LASF93:
+ 2323 00e9 63707573 		.ascii	"cpussCm4ClockCtlOffset\000"
+ 2323      73436D34 
+ 2323      436C6F63 
+ 2323      6B43746C 
+ 2323      4F666673 
+ 2324              	.LASF22:
+ 2325 0100 63707573 		.ascii	"cpussBase\000"
+ 2325      73426173 
+ 2325      6500
+ 2326              	.LASF71:
+ 2327 010a 64774368 		.ascii	"dwChCtlPrioPos\000"
+ 2327      43746C50 
+ 2327      72696F50 
+ 2327      6F7300
+ 2328              	.LASF178:
+ 2329 0119 4144435F 		.ascii	"ADC_currentConfig\000"
+ 2329      63757272 
+ 2329      656E7443 
+ 2329      6F6E6669 
+ 2329      6700
+ 2330              	.LASF13:
+ 2331 012b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2331      206C6F6E 
+ 2331      6720756E 
+ 2331      7369676E 
+ 2331      65642069 
+ 2332              	.LASF75:
+ 2333 0142 70657269 		.ascii	"periTrCmdOffset\000"
+ 2333      5472436D 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 45
+
+
+ 2333      644F6666 
+ 2333      73657400 
+ 2334              	.LASF136:
+ 2335 0152 72785269 		.ascii	"rxRingBuf\000"
+ 2335      6E674275 
+ 2335      6600
+ 2336              	.LASF99:
+ 2337 015c 63707573 		.ascii	"cpussSysTickCtlOffset\000"
+ 2337      73537973 
+ 2337      5469636B 
+ 2337      43746C4F 
+ 2337      66667365 
+ 2338              	.LASF175:
+ 2339 0172 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2339      52784275 
+ 2339      66666572 
+ 2339      00
+ 2340              	.LASF60:
+ 2341 017f 666C6173 		.ascii	"flashPipeRequired\000"
+ 2341      68506970 
+ 2341      65526571 
+ 2341      75697265 
+ 2341      6400
+ 2342              	.LASF64:
+ 2343 0191 666C6173 		.ascii	"flashCtlMainWs0Freq\000"
+ 2343      6843746C 
+ 2343      4D61696E 
+ 2343      57733046 
+ 2343      72657100 
+ 2344              	.LASF16:
+ 2345 01a5 696E7431 		.ascii	"int16_t\000"
+ 2345      365F7400 
+ 2346              	.LASF132:
+ 2347 01ad 63795F73 		.ascii	"cy_stc_sar_config_t\000"
+ 2347      74635F73 
+ 2347      61725F63 
+ 2347      6F6E6669 
+ 2347      675F7400 
+ 2348              	.LASF12:
+ 2349 01c1 6C6F6E67 		.ascii	"long long int\000"
+ 2349      206C6F6E 
+ 2349      6720696E 
+ 2349      7400
+ 2350              	.LASF2:
+ 2351 01cf 7369676E 		.ascii	"signed char\000"
+ 2351      65642063 
+ 2351      68617200 
+ 2352              	.LASF80:
+ 2353 01db 70657269 		.ascii	"periDivCmdTypeSelPos\000"
+ 2353      44697643 
+ 2353      6D645479 
+ 2353      70655365 
+ 2353      6C506F73 
+ 2354              	.LASF116:
+ 2355 01f0 63795F65 		.ascii	"cy_en_sar_range_detect_condition_t\000"
+ 2355      6E5F7361 
+ 2355      725F7261 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 46
+
+
+ 2355      6E67655F 
+ 2355      64657465 
+ 2356              	.LASF153:
+ 2357 0213 636C6B44 		.ascii	"clkDivider\000"
+ 2357      69766964 
+ 2357      657200
+ 2358              	.LASF26:
+ 2359 021e 70726F74 		.ascii	"protBase\000"
+ 2359      42617365 
+ 2359      00
+ 2360              	.LASF38:
+ 2361 0227 69706356 		.ascii	"ipcVersion\000"
+ 2361      65727369 
+ 2361      6F6E00
+ 2362              	.LASF100:
+ 2363 0232 63707573 		.ascii	"cpussCm0NmiCtlOffset\000"
+ 2363      73436D30 
+ 2363      4E6D6943 
+ 2363      746C4F66 
+ 2363      66736574 
+ 2364              	.LASF48:
+ 2365 0247 73727373 		.ascii	"srssNumClkpath\000"
+ 2365      4E756D43 
+ 2365      6C6B7061 
+ 2365      746800
+ 2366              	.LASF27:
+ 2367 0256 6873696F 		.ascii	"hsiomBase\000"
+ 2367      6D426173 
+ 2367      6500
+ 2368              	.LASF112:
+ 2369 0260 43595F53 		.ascii	"CY_SAR_RANGE_COND_BELOW\000"
+ 2369      41525F52 
+ 2369      414E4745 
+ 2369      5F434F4E 
+ 2369      445F4245 
+ 2370              	.LASF9:
+ 2371 0278 6C6F6E67 		.ascii	"long int\000"
+ 2371      20696E74 
+ 2371      00
+ 2372              	.LASF83:
+ 2373 0281 70657269 		.ascii	"periDiv8CtlOffset\000"
+ 2373      44697638 
+ 2373      43746C4F 
+ 2373      66667365 
+ 2373      7400
+ 2374              	.LASF58:
+ 2375 0293 63727970 		.ascii	"cryptoMemSize\000"
+ 2375      746F4D65 
+ 2375      6D53697A 
+ 2375      6500
+ 2376              	.LASF24:
+ 2377 02a1 70657269 		.ascii	"periBase\000"
+ 2377      42617365 
+ 2377      00
+ 2378              	.LASF56:
+ 2379 02aa 73797350 		.ascii	"sysPmSimoPresent\000"
+ 2379      6D53696D 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 47
+
+
+ 2379      6F507265 
+ 2379      73656E74 
+ 2379      00
+ 2380              	.LASF114:
+ 2381 02bb 43595F53 		.ascii	"CY_SAR_RANGE_COND_ABOVE\000"
+ 2381      41525F52 
+ 2381      414E4745 
+ 2381      5F434F4E 
+ 2381      445F4142 
+ 2382              	.LASF46:
+ 2383 02d3 63707573 		.ascii	"cpussFmIrq\000"
+ 2383      73466D49 
+ 2383      727100
+ 2384              	.LASF0:
+ 2385 02de 646F7562 		.ascii	"double\000"
+ 2385      6C6500
+ 2386              	.LASF85:
+ 2387 02e5 70657269 		.ascii	"periDiv16_5CtlOffset\000"
+ 2387      44697631 
+ 2387      365F3543 
+ 2387      746C4F66 
+ 2387      66736574 
+ 2388              	.LASF49:
+ 2389 02fa 73727373 		.ascii	"srssNumPll\000"
+ 2389      4E756D50 
+ 2389      6C6C00
+ 2390              	.LASF154:
+ 2391 0305 4144435F 		.ascii	"ADC_CONFIG_STRUCT\000"
+ 2391      434F4E46 
+ 2391      49475F53 
+ 2391      54525543 
+ 2391      5400
+ 2392              	.LASF125:
+ 2393 0317 696E7472 		.ascii	"intrMask\000"
+ 2393      4D61736B 
+ 2393      00
+ 2394              	.LASF119:
+ 2395 0320 73616D70 		.ascii	"sampleTime01\000"
+ 2395      6C655469 
+ 2395      6D653031 
+ 2395      00
+ 2396              	.LASF7:
+ 2397 032d 73686F72 		.ascii	"short unsigned int\000"
+ 2397      7420756E 
+ 2397      7369676E 
+ 2397      65642069 
+ 2397      6E7400
+ 2398              	.LASF90:
+ 2399 0340 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
+ 2399      50727443 
+ 2399      66674F75 
+ 2399      744F6666 
+ 2399      73657400 
+ 2400              	.LASF23:
+ 2401 0354 666C6173 		.ascii	"flashcBase\000"
+ 2401      68634261 
+ 2401      736500
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 48
+
+
+ 2402              	.LASF10:
+ 2403 035f 5F5F7569 		.ascii	"__uint32_t\000"
+ 2403      6E743332 
+ 2403      5F7400
+ 2404              	.LASF53:
+ 2405 036a 70617373 		.ascii	"passSarChannels\000"
+ 2405      53617243 
+ 2405      68616E6E 
+ 2405      656C7300 
+ 2406              	.LASF151:
+ 2407 037a 6877436F 		.ascii	"hwConfigStc\000"
+ 2407      6E666967 
+ 2407      53746300 
+ 2408              	.LASF5:
+ 2409 0386 5F5F696E 		.ascii	"__int16_t\000"
+ 2409      7431365F 
+ 2409      7400
+ 2410              	.LASF142:
+ 2411 0390 72784275 		.ascii	"rxBufIdx\000"
+ 2411      66496478 
+ 2411      00
+ 2412              	.LASF96:
+ 2413 0399 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
+ 2413      73436D34 
+ 2413      50777243 
+ 2413      746C4F66 
+ 2413      66736574 
+ 2414              	.LASF144:
+ 2415 03ae 74784275 		.ascii	"txBufSize\000"
+ 2415      6653697A 
+ 2415      6500
+ 2416              	.LASF91:
+ 2417 03b8 6770696F 		.ascii	"gpioPrtCfgSioOffset\000"
+ 2417      50727443 
+ 2417      66675369 
+ 2417      6F4F6666 
+ 2417      73657400 
+ 2418              	.LASF43:
+ 2419 03cc 63707573 		.ascii	"cpussDwChNr\000"
+ 2419      73447743 
+ 2419      684E7200 
+ 2420              	.LASF14:
+ 2421 03d8 756E7369 		.ascii	"unsigned int\000"
+ 2421      676E6564 
+ 2421      20696E74 
+ 2421      00
+ 2422              	.LASF17:
+ 2423 03e5 75696E74 		.ascii	"uint16_t\000"
+ 2423      31365F74 
+ 2423      00
+ 2424              	.LASF155:
+ 2425 03ee 66726565 		.ascii	"free_run\000"
+ 2425      5F72756E 
+ 2425      00
+ 2426              	.LASF76:
+ 2427 03f7 70657269 		.ascii	"periTrCmdGrSelMsk\000"
+ 2427      5472436D 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 49
+
+
+ 2427      64477253 
+ 2427      656C4D73 
+ 2427      6B00
+ 2428              	.LASF65:
+ 2429 0409 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ 2429      6843746C 
+ 2429      4D61696E 
+ 2429      57733146 
+ 2429      72657100 
+ 2430              	.LASF11:
+ 2431 041d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2431      20756E73 
+ 2431      69676E65 
+ 2431      6420696E 
+ 2431      7400
+ 2432              	.LASF133:
+ 2433 042f 63795F63 		.ascii	"cy_cb_scb_uart_handle_events_t\000"
+ 2433      625F7363 
+ 2433      625F7561 
+ 2433      72745F68 
+ 2433      616E646C 
+ 2434              	.LASF177:
+ 2435 044e 55415254 		.ascii	"UART_context\000"
+ 2435      5F636F6E 
+ 2435      74657874 
+ 2435      00
+ 2436              	.LASF41:
+ 2437 045b 63707573 		.ascii	"cpussIpcNr\000"
+ 2437      73497063 
+ 2437      4E7200
+ 2438              	.LASF28:
+ 2439 0466 6770696F 		.ascii	"gpioBase\000"
+ 2439      42617365 
+ 2439      00
+ 2440              	.LASF66:
+ 2441 046f 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
+ 2441      6843746C 
+ 2441      4D61696E 
+ 2441      57733246 
+ 2441      72657100 
+ 2442              	.LASF168:
+ 2443 0483 64617461 		.ascii	"data\000"
+ 2443      00
+ 2444              	.LASF77:
+ 2445 0488 70657269 		.ascii	"periTrGrOffset\000"
+ 2445      54724772 
+ 2445      4F666673 
+ 2445      657400
+ 2446              	.LASF104:
+ 2447 0497 63707573 		.ascii	"cpussRam1Ctl0\000"
+ 2447      7352616D 
+ 2447      3143746C 
+ 2447      3000
+ 2448              	.LASF121:
+ 2449 04a5 72616E67 		.ascii	"rangeThres\000"
+ 2449      65546872 
+ 2449      657300
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 50
+
+
+ 2450              	.LASF167:
+ 2451 04b0 74726967 		.ascii	"trigch\000"
+ 2451      636800
+ 2452              	.LASF146:
+ 2453 04b7 63624576 		.ascii	"cbEvents\000"
+ 2453      656E7473 
+ 2453      00
+ 2454              	.LASF78:
+ 2455 04c0 70657269 		.ascii	"periTrGrSize\000"
+ 2455      54724772 
+ 2455      53697A65 
+ 2455      00
+ 2456              	.LASF36:
+ 2457 04cd 6770696F 		.ascii	"gpioVersion\000"
+ 2457      56657273 
+ 2457      696F6E00 
+ 2458              	.LASF143:
+ 2459 04d9 74784275 		.ascii	"txBuf\000"
+ 2459      6600
+ 2460              	.LASF150:
+ 2461 04df 6E756D43 		.ascii	"numChannels\000"
+ 2461      68616E6E 
+ 2461      656C7300 
+ 2462              	.LASF108:
+ 2463 04eb 63795F73 		.ascii	"cy_stc_device_t\000"
+ 2463      74635F64 
+ 2463      65766963 
+ 2463      655F7400 
+ 2464              	.LASF124:
+ 2465 04fb 6368616E 		.ascii	"chanConfig\000"
+ 2465      436F6E66 
+ 2465      696700
+ 2466              	.LASF149:
+ 2467 0506 6368616E 		.ascii	"channelBase\000"
+ 2467      6E656C42 
+ 2467      61736500 
+ 2468              	.LASF54:
+ 2469 0512 65704D6F 		.ascii	"epMonitorNr\000"
+ 2469      6E69746F 
+ 2469      724E7200 
+ 2470              	.LASF138:
+ 2471 051e 72785269 		.ascii	"rxRingBufHead\000"
+ 2471      6E674275 
+ 2471      66486561 
+ 2471      6400
+ 2472              	.LASF97:
+ 2473 052c 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
+ 2473      73547269 
+ 2473      6D52616D 
+ 2473      43746C4F 
+ 2473      66667365 
+ 2474              	.LASF161:
+ 2475 0542 78736361 		.ascii	"xscale\000"
+ 2475      6C6500
+ 2476              	.LASF92:
+ 2477 0549 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
+ 2477      73436D30 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 51
+
+
+ 2477      436C6F63 
+ 2477      6B43746C 
+ 2477      4F666673 
+ 2478              	.LASF32:
+ 2479 0560 63707573 		.ascii	"cpussVersion\000"
+ 2479      73566572 
+ 2479      73696F6E 
+ 2479      00
+ 2480              	.LASF39:
+ 2481 056d 70657269 		.ascii	"periVersion\000"
+ 2481      56657273 
+ 2481      696F6E00 
+ 2482              	.LASF95:
+ 2483 0579 63707573 		.ascii	"cpussCm0StatusOffset\000"
+ 2483      73436D30 
+ 2483      53746174 
+ 2483      75734F66 
+ 2483      66736574 
+ 2484              	.LASF20:
+ 2485 058e 73697A65 		.ascii	"sizetype\000"
+ 2485      74797065 
+ 2485      00
+ 2486              	.LASF69:
+ 2487 0597 64774368 		.ascii	"dwChOffset\000"
+ 2487      4F666673 
+ 2487      657400
+ 2488              	.LASF44:
+ 2489 05a2 63707573 		.ascii	"cpussFlashPaSize\000"
+ 2489      73466C61 
+ 2489      73685061 
+ 2489      53697A65 
+ 2489      00
+ 2490              	.LASF120:
+ 2491 05b3 73616D70 		.ascii	"sampleTime23\000"
+ 2491      6C655469 
+ 2491      6D653233 
+ 2491      00
+ 2492              	.LASF82:
+ 2493 05c0 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
+ 2493      44697643 
+ 2493      6D645061 
+ 2493      54797065 
+ 2493      53656C50 
+ 2494              	.LASF105:
+ 2495 05d7 63707573 		.ascii	"cpussRam2Ctl0\000"
+ 2495      7352616D 
+ 2495      3243746C 
+ 2495      3000
+ 2496              	.LASF130:
+ 2497 05e5 636F6E66 		.ascii	"configRouting\000"
+ 2497      6967526F 
+ 2497      7574696E 
+ 2497      6700
+ 2498              	.LASF73:
+ 2499 05f3 64775374 		.ascii	"dwStatusChIdxPos\000"
+ 2499      61747573 
+ 2499      43684964 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 52
+
+
+ 2499      78506F73 
+ 2499      00
+ 2500              	.LASF55:
+ 2501 0604 75646250 		.ascii	"udbPresent\000"
+ 2501      72657365 
+ 2501      6E7400
+ 2502              	.LASF172:
+ 2503 060f 74726967 		.ascii	"triggerDetection\000"
+ 2503      67657244 
+ 2503      65746563 
+ 2503      74696F6E 
+ 2503      00
+ 2504              	.LASF35:
+ 2505 0620 666C6173 		.ascii	"flashcVersion\000"
+ 2505      68635665 
+ 2505      7273696F 
+ 2505      6E00
+ 2506              	.LASF31:
+ 2507 062e 63727970 		.ascii	"cryptoBase\000"
+ 2507      746F4261 
+ 2507      736500
+ 2508              	.LASF52:
+ 2509 0639 736D6966 		.ascii	"smifDeviceNr\000"
+ 2509      44657669 
+ 2509      63654E72 
+ 2509      00
+ 2510              	.LASF127:
+ 2511 0646 72616E67 		.ascii	"rangeIntrMask\000"
+ 2511      65496E74 
+ 2511      724D6173 
+ 2511      6B00
+ 2512              	.LASF180:
+ 2513 0654 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2513      43313120 
+ 2513      352E342E 
+ 2513      31203230 
+ 2513      31363036 
+ 2514 0687 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 2514      20726576 
+ 2514      6973696F 
+ 2514      6E203233 
+ 2514      37373135 
+ 2515 06ba 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 2515      70202D6D 
+ 2515      6670753D 
+ 2515      66707634 
+ 2515      2D73702D 
+ 2516 06ed 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 2516      6F6E7320 
+ 2516      2D666661 
+ 2516      742D6C74 
+ 2516      6F2D6F62 
+ 2517              	.LASF162:
+ 2518 0707 79736361 		.ascii	"yscale\000"
+ 2518      6C6500
+ 2519              	.LASF110:
+ 2520 070e 666C6F61 		.ascii	"float\000"
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 53
+
+
+ 2520      7400
+ 2521              	.LASF74:
+ 2522 0714 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ 2522      61747573 
+ 2522      43684964 
+ 2522      784D736B 
+ 2522      00
+ 2523              	.LASF176:
+ 2524 0725 63795F64 		.ascii	"cy_device\000"
+ 2524      65766963 
+ 2524      6500
+ 2525              	.LASF102:
+ 2526 072f 63707573 		.ascii	"cpussRomCtl\000"
+ 2526      73526F6D 
+ 2526      43746C00 
+ 2527              	.LASF72:
+ 2528 073b 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ 2528      43746C50 
+ 2528      7265656D 
+ 2528      70746162 
+ 2528      6C65506F 
+ 2529              	.LASF145:
+ 2530 0751 74784C65 		.ascii	"txLeftToTransmit\000"
+ 2530      6674546F 
+ 2530      5472616E 
+ 2530      736D6974 
+ 2530      00
+ 2531              	.LASF123:
+ 2532 0762 6368616E 		.ascii	"chanEn\000"
+ 2532      456E00
+ 2533              	.LASF25:
+ 2534 0769 75646242 		.ascii	"udbBase\000"
+ 2534      61736500 
+ 2535              	.LASF113:
+ 2536 0771 43595F53 		.ascii	"CY_SAR_RANGE_COND_INSIDE\000"
+ 2536      41525F52 
+ 2536      414E4745 
+ 2536      5F434F4E 
+ 2536      445F494E 
+ 2537              	.LASF111:
+ 2538 078a 5F426F6F 		.ascii	"_Bool\000"
+ 2538      6C00
+ 2539              	.LASF18:
+ 2540 0790 696E7433 		.ascii	"int32_t\000"
+ 2540      325F7400 
+ 2541              	.LASF3:
+ 2542 0798 756E7369 		.ascii	"unsigned char\000"
+ 2542      676E6564 
+ 2542      20636861 
+ 2542      7200
+ 2543              	.LASF68:
+ 2544 07a6 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
+ 2544      6843746C 
+ 2544      4D61696E 
+ 2544      57733446 
+ 2544      72657100 
+ 2545              	.LASF1:
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 54
+
+
+ 2546 07ba 73686F72 		.ascii	"short int\000"
+ 2546      7420696E 
+ 2546      7400
+ 2547              	.LASF128:
+ 2548 07c4 6D757853 		.ascii	"muxSwitch\000"
+ 2548      77697463 
+ 2548      6800
+ 2549              	.LASF79:
+ 2550 07ce 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ 2550      44697643 
+ 2550      6D644469 
+ 2550      7653656C 
+ 2550      4D736B00 
+ 2551              	.LASF163:
+ 2552 07e2 66726571 		.ascii	"freq1\000"
+ 2552      3100
+ 2553              	.LASF164:
+ 2554 07e8 66726571 		.ascii	"freq2\000"
+ 2554      3200
+ 2555              	.LASF50:
+ 2556 07ee 73727373 		.ascii	"srssNumHfroot\000"
+ 2556      4E756D48 
+ 2556      66726F6F 
+ 2556      7400
+ 2557              	.LASF63:
+ 2558 07fc 666C6173 		.ascii	"flashEraseDelay\000"
+ 2558      68457261 
+ 2558      73654465 
+ 2558      6C617900 
+ 2559              	.LASF170:
+ 2560 080c 66696E64 		.ascii	"findSlope\000"
+ 2560      536C6F70 
+ 2560      6500
+ 2561              	.LASF19:
+ 2562 0816 75696E74 		.ascii	"uint32_t\000"
+ 2562      33325F74 
+ 2562      00
+ 2563              	.LASF101:
+ 2564 081f 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
+ 2564      73436D34 
+ 2564      4E6D6943 
+ 2564      746C4F66 
+ 2564      66736574 
+ 2565              	.LASF131:
+ 2566 0834 76726566 		.ascii	"vrefMvValue\000"
+ 2566      4D765661 
+ 2566      6C756500 
+ 2567              	.LASF21:
+ 2568 0840 6C6F6E67 		.ascii	"long double\000"
+ 2568      20646F75 
+ 2568      626C6500 
+ 2569              	.LASF109:
+ 2570 084c 63686172 		.ascii	"char\000"
+ 2570      00
+ 2571              	.LASF40:
+ 2572 0851 70726F74 		.ascii	"protVersion\000"
+ 2572      56657273 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 55
+
+
+ 2572      696F6E00 
+ 2573              	.LASF160:
+ 2574 085d 6D6F6465 		.ascii	"mode\000"
+ 2574      00
+ 2575              	.LASF103:
+ 2576 0862 63707573 		.ascii	"cpussRam0Ctl0\000"
+ 2576      7352616D 
+ 2576      3043746C 
+ 2576      3000
+ 2577              	.LASF179:
+ 2578 0870 4144435F 		.ascii	"ADC_allConfigs\000"
+ 2578      616C6C43 
+ 2578      6F6E6669 
+ 2578      677300
+ 2579              	.LASF173:
+ 2580 087f 636F6E66 		.ascii	"config\000"
+ 2580      696700
+ 2581              	.LASF157:
+ 2582 0886 4D6F6465 		.ascii	"Mode\000"
+ 2582      00
+ 2583              	.LASF6:
+ 2584 088b 5F5F7569 		.ascii	"__uint16_t\000"
+ 2584      6E743136 
+ 2584      5F7400
+ 2585              	.LASF84:
+ 2586 0896 70657269 		.ascii	"periDiv16CtlOffset\000"
+ 2586      44697631 
+ 2586      3643746C 
+ 2586      4F666673 
+ 2586      657400
+ 2587              	.LASF8:
+ 2588 08a9 5F5F696E 		.ascii	"__int32_t\000"
+ 2588      7433325F 
+ 2588      7400
+ 2589              	.LASF37:
+ 2590 08b3 6873696F 		.ascii	"hsiomVersion\000"
+ 2590      6D566572 
+ 2590      73696F6E 
+ 2590      00
+ 2591              	.LASF62:
+ 2592 08c0 666C6173 		.ascii	"flashProgramDelay\000"
+ 2592      6850726F 
+ 2592      6772616D 
+ 2592      44656C61 
+ 2592      7900
+ 2593              	.LASF117:
+ 2594 08d2 6374726C 		.ascii	"ctrl\000"
+ 2594      00
+ 2595              	.LASF137:
+ 2596 08d7 72785269 		.ascii	"rxRingBufSize\000"
+ 2596      6E674275 
+ 2596      6653697A 
+ 2596      6500
+ 2597              	.LASF159:
+ 2598 08e5 53657474 		.ascii	"Settings\000"
+ 2598      696E6773 
+ 2598      00
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 56
+
+
+ 2599              	.LASF152:
+ 2600 08ee 6D697363 		.ascii	"miscConfig\000"
+ 2600      436F6E66 
+ 2600      696700
+ 2601              	.LASF70:
+ 2602 08f9 64774368 		.ascii	"dwChSize\000"
+ 2602      53697A65 
+ 2602      00
+ 2603              	.LASF106:
+ 2604 0902 69706353 		.ascii	"ipcStructSize\000"
+ 2604      74727563 
+ 2604      7453697A 
+ 2604      6500
+ 2605              	.LASF45:
+ 2606 0910 63707573 		.ascii	"cpussIpc0Irq\000"
+ 2606      73497063 
+ 2606      30497271 
+ 2606      00
+ 2607              	.LASF169:
+ 2608 091d 66696E64 		.ascii	"findAmp\000"
+ 2608      416D7000 
+ 2609              	.LASF88:
+ 2610 0925 6770696F 		.ascii	"gpioPrtCfgOffset\000"
+ 2610      50727443 
+ 2610      66674F66 
+ 2610      66736574 
+ 2610      00
+ 2611              	.LASF147:
+ 2612 0936 696E6974 		.ascii	"initKey\000"
+ 2612      4B657900 
+ 2613              	.LASF140:
+ 2614 093e 72784275 		.ascii	"rxBuf\000"
+ 2614      6600
+ 2615              	.LASF171:
+ 2616 0944 61766753 		.ascii	"avgSmoothing\000"
+ 2616      6D6F6F74 
+ 2616      68696E67 
+ 2616      00
+ 2617              	.LASF122:
+ 2618 0951 72616E67 		.ascii	"rangeCond\000"
+ 2618      65436F6E 
+ 2618      6400
+ 2619              	.LASF47:
+ 2620 095b 63707573 		.ascii	"cpussNotConnectedIrq\000"
+ 2620      734E6F74 
+ 2620      436F6E6E 
+ 2620      65637465 
+ 2620      64497271 
+ 2621              	.LASF61:
+ 2622 0970 666C6173 		.ascii	"flashWriteDelay\000"
+ 2622      68577269 
+ 2622      74654465 
+ 2622      6C617900 
+ 2623              	.LASF118:
+ 2624 0980 73616D70 		.ascii	"sampleCtrl\000"
+ 2624      6C654374 
+ 2624      726C00
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 57
+
+
+ 2625              	.LASF166:
+ 2626 098b 74726967 		.ascii	"trigl\000"
+ 2626      6C00
+ 2627              	.LASF15:
+ 2628 0991 75696E74 		.ascii	"uint8_t\000"
+ 2628      385F7400 
+ 2629              	.LASF135:
+ 2630 0999 72785374 		.ascii	"rxStatus\000"
+ 2630      61747573 
+ 2630      00
+ 2631              	.LASF94:
+ 2632 09a2 63707573 		.ascii	"cpussCm4StatusOffset\000"
+ 2632      73436D34 
+ 2632      53746174 
+ 2632      75734F66 
+ 2632      66736574 
+ 2633              	.LASF87:
+ 2634 09b7 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
+ 2634      50727449 
+ 2634      6E747243 
+ 2634      66674F66 
+ 2634      66736574 
+ 2635              	.LASF115:
+ 2636 09cc 43595F53 		.ascii	"CY_SAR_RANGE_COND_OUTSIDE\000"
+ 2636      41525F52 
+ 2636      414E4745 
+ 2636      5F434F4E 
+ 2636      445F4F55 
+ 2637              	.LASF139:
+ 2638 09e6 72785269 		.ascii	"rxRingBufTail\000"
+ 2638      6E674275 
+ 2638      66546169 
+ 2638      6C00
+ 2639              	.LASF182:
+ 2640 09f4 433A5C55 		.ascii	"C:\\Users\\dasta\\cse121\\Lab\\project\\design\\Wor"
+ 2640      73657273 
+ 2640      5C646173 
+ 2640      74615C63 
+ 2640      73653132 
+ 2641 0a20 6B737061 		.ascii	"kspace01\\project.cydsn\000"
+ 2641      63653031 
+ 2641      5C70726F 
+ 2641      6A656374 
+ 2641      2E637964 
+ 2642              	.LASF98:
+ 2643 0a37 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
+ 2643      73547269 
+ 2643      6D526F6D 
+ 2643      43746C4F 
+ 2643      66667365 
+ 2644              	.LASF134:
+ 2645 0a4d 74785374 		.ascii	"txStatus\000"
+ 2645      61747573 
+ 2645      00
+ 2646              	.LASF129:
+ 2647 0a56 6D757853 		.ascii	"muxSwitchSqCtrl\000"
+ 2647      77697463 
+ARM GAS  C:\Users\dasta\AppData\Local\Temp\cczVSuOv.s 			page 58
+
+
+ 2647      68537143 
+ 2647      74726C00 
+ 2648              	.LASF34:
+ 2649 0a66 64775665 		.ascii	"dwVersion\000"
+ 2649      7273696F 
+ 2649      6E00
+ 2650              	.LASF30:
+ 2651 0a70 69706342 		.ascii	"ipcBase\000"
+ 2651      61736500 
+ 2652              	.LASF156:
+ 2653 0a78 74726967 		.ascii	"trigger\000"
+ 2653      67657200 
+ 2654              	.LASF81:
+ 2655 0a80 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ 2655      44697643 
+ 2655      6D645061 
+ 2655      44697653 
+ 2655      656C506F 
+ 2656              	.LASF158:
+ 2657 0a96 63795F73 		.ascii	"cy_stc_scb_uart_context\000"
+ 2657      74635F73 
+ 2657      63625F75 
+ 2657      6172745F 
+ 2657      636F6E74 
+ 2658              	.LASF59:
+ 2659 0aae 666C6173 		.ascii	"flashRwwRequired\000"
+ 2659      68527777 
+ 2659      52657175 
+ 2659      69726564 
+ 2659      00
+ 2660              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
