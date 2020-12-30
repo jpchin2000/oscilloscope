@@ -9,3 +9,4 @@
  main_cm4.c
  All .h files
  
+Runs on PSoC 6 board.
