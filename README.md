@@ -1,5 +1,5 @@
 # oscilloscope
- Oscilloscope done for CSE121 F20
+ Oscilloscope
  
  A basic oscilloscope function that can measure and display waveforms.
  Has 2 modes: free-running and trigger as well as support for 2 different channels.
